@@ -16,12 +16,15 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
   Future<String> _displayName;
+  Future<String> _icon;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    _displayName = Scrap.getProjectName(widget.path);
+    final result = Scrap.getJsonProject(widget.path);
+    _displayName = Scrap.getProjectName(result);
+    _icon = Scrap.getProjectIcon(result);
   }
 
   @override
@@ -38,6 +41,17 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
             child: Column(
               children: [
                 ListTile(
+                  leading: FutureBuilder<String>(
+                    future: _icon,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Image.network(snapshot.data);
+                      } else if (snapshot.hasError) {
+                        return Icon(Icons.error);
+                      }
+                      return CircularProgressIndicator();
+                    },
+                  ),
                   title: FutureBuilder<String>(
                     future: _displayName,
                     builder: (context, snapshot) {
