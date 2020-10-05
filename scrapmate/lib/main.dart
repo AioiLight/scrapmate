@@ -97,8 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Project(
-              name: "Projet Name",
-              path: "example",
+              path: "aioilight",
             ),
           ],
         ),
