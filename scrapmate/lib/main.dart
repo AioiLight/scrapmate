@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/widgets/project.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Const().AppName,
+      title: Const.AppName,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: Const().AppName),
+      home: MyHomePage(title: Const.AppName),
     );
   }
 }
@@ -51,8 +52,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   void _pushedAddProject() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -60,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
@@ -98,12 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Project(
+              name: "Projet Name",
+              path: "example",
             ),
           ],
         ),

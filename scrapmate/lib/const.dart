@@ -1,3 +1,3 @@
 class Const {
-  String AppName = "ScrapMate";
+  static const String AppName = "ScrapMate";
 }
