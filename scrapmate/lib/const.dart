@@ -4,4 +4,7 @@ class Const {
   static const String AppName = "ScrapMate";
 
   static const EdgeInsets Edge = EdgeInsets.all(10.0);
+
+  static const ScrollPhysics ListScrollPhysics =
+      AlwaysScrollableScrollPhysics();
 }
