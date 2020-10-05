@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scrapmate/const.dart';
 import 'package:scrapmate/util.dart';
 
 class Project extends StatefulWidget {
@@ -30,11 +31,8 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: const EdgeInsets.all(50.0),
         child: Container(
-            margin: const EdgeInsets.all(10.0),
-            width: 300,
-            height: 100,
+            margin: Const.Edge,
             child: Column(
               children: [
                 ListTile(
