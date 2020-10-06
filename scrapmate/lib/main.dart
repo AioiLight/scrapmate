@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/widgets/project.dart';
+import 'package:scrapmate/widgets/scrappage.dart';
 
 void main() {
   runApp(MyApp());
@@ -98,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _pushedAddProject,
         tooltip: 'Add project',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

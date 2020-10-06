@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/scrap.dart';
 
 class Project extends StatefulWidget {
@@ -17,6 +18,7 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
 
   Future<String> _displayName;
   Future<String> _icon;
+  String _dispNameResult;
 
   @override
   void initState() {
@@ -25,6 +27,8 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
     final result = Scrap.getJsonProject(widget.path);
     _displayName = Scrap.getProjectName(result);
     _icon = Scrap.getProjectIcon(result);
+
+    _displayName.then((value) => _dispNameResult = value);
   }
 
   @override
@@ -36,36 +40,37 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Container(
-            margin: Const.Edge,
-            child: Column(
-              children: [
-                ListTile(
-                  leading: FutureBuilder<String>(
-                    future: _icon,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Image.network(snapshot.data);
-                      } else if (snapshot.hasError) {
-                        return Icon(Icons.error);
-                      }
-                      return CircularProgressIndicator();
-                    },
-                  ),
-                  title: FutureBuilder<String>(
-                    future: _displayName,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(snapshot.data);
-                      } else if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
-                      }
-                      return Text("Loading...");
-                    },
-                  ),
-                  subtitle: Text(Scrap.getProjectUrl(widget.path)),
-                )
-              ],
-            )));
+        child: ListTile(
+      leading: FutureBuilder<String>(
+        future: _icon,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Image.network(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Icon(Icons.error);
+          }
+          return CircularProgressIndicator();
+        },
+      ),
+      title: FutureBuilder<String>(
+        future: _displayName,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return Text("Loading...");
+        },
+      ),
+      subtitle: Text(Scrap.getProjectUrl(widget.path)),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProjectPage(
+                    title: _dispNameResult,
+                    id: widget.path,
+                  ))),
+    ));
   }
 }
