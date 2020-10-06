@@ -34,12 +34,13 @@ class _ScrapPageState extends State<ScrapPage>
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: ListTile(
-      leading: widget.thumbnail != null
-          ? Image.network(widget.thumbnail)
-          : Icon(Icons.error),
-      title: Text(widget.title),
-      subtitle: Text(widget.lead),
-    ));
+      child: ListTile(
+        title: Text(widget.title),
+        subtitle: widget.thumbnail != null
+            ? Image.network(widget.thumbnail)
+            : Text(widget.lead),
+      ),
+      clipBehavior: Clip.antiAlias,
+    );
   }
 }

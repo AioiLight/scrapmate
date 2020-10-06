@@ -51,8 +51,10 @@ class _ProjectPageState extends State<ProjectPage>
       body: Container(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: ListView.builder(
+        child: GridView.builder(
           physics: Const.ListScrollPhysics,
+          gridDelegate:
+              new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (BuildContext context, int index) {
             if (_itemsResult == null) {
               return null;
