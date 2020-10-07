@@ -14,7 +14,7 @@ class Scrap {
   }
 
   static Future<Map<String, dynamic>> getJsonUserTop(String projectPath,
-      {int skip = 0, int limit = 10}) async {
+      {int skip = 0, int limit = 20}) async {
     final url = "/api/pages/$projectPath";
 
     final response = await fetch(url,

@@ -20,11 +20,29 @@ class _ProjectPageState extends State<ProjectPage>
 
   Future<List<ScrapboxPageListResultPage>> _items;
   List<ScrapboxPageListResultPage> _itemsResult;
+  bool _loading = false;
 
-  void loaded(List<ScrapboxPageListResultPage> result) {
+  void _loaded(List<ScrapboxPageListResultPage> result) {
     setState(() {
       _itemsResult = result;
     });
+  }
+
+  Future<void> _loadmore() async {
+    if (_loading) {
+      return null;
+    }
+
+    _loading = true;
+
+    final newPages = await Scrap.getPages(
+        Scrap.getJsonUserTop(widget.id, skip: _itemsResult.length));
+
+    setState(() {
+      _itemsResult.addAll(newPages);
+    });
+
+    _loading = false;
   }
 
   @override
@@ -33,7 +51,7 @@ class _ProjectPageState extends State<ProjectPage>
     _controller = AnimationController(vsync: this);
 
     _items = Scrap.getPages(Scrap.getJsonUserTop(widget.id));
-    _items.then((value) => loaded(value));
+    _items.then((value) => _loaded(value));
   }
 
   @override
@@ -59,6 +77,16 @@ class _ProjectPageState extends State<ProjectPage>
             if (_itemsResult == null) {
               return null;
             }
+
+            if (index == _itemsResult.length) {
+              _loadmore();
+              return const CircularProgressIndicator();
+            }
+
+            if (index > _itemsResult.length) {
+              return null;
+            }
+
             final item = _itemsResult[index];
             return ScrapPage(
               id: item.id,
