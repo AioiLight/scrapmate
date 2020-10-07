@@ -64,13 +64,18 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
         },
       ),
       subtitle: Text(Scrap.getProjectUrl(widget.path)),
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ProjectPage(
-                    title: _dispNameResult,
-                    id: widget.path,
-                  ))),
+      onTap: () => {
+        if (_dispNameResult != null)
+          {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProjectPage(
+                          title: _dispNameResult,
+                          id: widget.path,
+                        )))
+          }
+      },
     ));
   }
 }
