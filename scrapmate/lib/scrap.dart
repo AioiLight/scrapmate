@@ -7,15 +7,18 @@ class Scrap {
     return "https://scrapbox.io/$projectPath/";
   }
 
-  static Future<http.Response> fetch(String url,
-      {Map<String, String> headers}) {
-    return http.get(url, headers: headers);
+  static Future<http.Response> fetch(String path,
+      {Map<String, String> params}) {
+    final uri = Uri.https("scrapbox.io", path, params);
+    return http.get(uri);
   }
 
-  static Future<Map<String, dynamic>> getJsonUserTop(String projectPath) async {
-    final url = "https://scrapbox.io/api/pages/$projectPath";
+  static Future<Map<String, dynamic>> getJsonUserTop(String projectPath,
+      {int skip = 0, int limit = 10}) async {
+    final url = "/api/pages/$projectPath";
 
-    final response = await fetch(url);
+    final response = await fetch(url,
+        params: {'skip': skip.toString(), 'limit': limit.toString()});
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> j = json.decode(response.body);
@@ -26,7 +29,7 @@ class Scrap {
   }
 
   static Future<Map<String, dynamic>> getJsonProject(String projectPath) async {
-    final url = "https://scrapbox.io/api/projects/$projectPath";
+    final url = "/api/projects/$projectPath";
 
     final response = await fetch(url);
 
