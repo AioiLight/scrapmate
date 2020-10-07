@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:scrapmate/const.dart';
 import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/scrap.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Project extends StatefulWidget {
   Project({this.path});
@@ -45,7 +45,7 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
         future: _icon,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Image.network(snapshot.data);
+            return Image(image: CachedNetworkImageProvider(snapshot.data));
           } else if (snapshot.hasError) {
             return Icon(Icons.error);
           }

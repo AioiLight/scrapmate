@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scrapmate/const.dart';
@@ -37,7 +38,7 @@ class _ScrapPageState extends State<ScrapPage>
       child: ListTile(
         title: Text(widget.title),
         subtitle: widget.thumbnail != null
-            ? Image.network(widget.thumbnail)
+            ? Image(image: CachedNetworkImageProvider(widget.thumbnail))
             : Text(widget.lead),
       ),
       clipBehavior: Clip.antiAlias,
