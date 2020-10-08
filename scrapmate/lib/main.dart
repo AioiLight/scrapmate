@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/scrap.dart';
+import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/addProjectDialog.dart';
 import 'package:scrapmate/widgets/project.dart';
 import 'package:scrapmate/widgets/scrappage.dart';
@@ -54,7 +56,12 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  var _list = List<ScrapboxProjectPref>();
+
   void _pushedAddProject() async {
     final result = await showDialog<String>(
         context: context,
@@ -67,8 +74,44 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void _addProject(String projectURL) {
-    Fluttertoast.showToast(msg: projectURL);
+  void _loadProject() async {
+    final pref = await Util.getPrefProjects();
+    setState(() {
+      _list = pref;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _loadProject();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  void _addProject(String projectURL) async {
+    final projectJson = Scrap.getJsonProject(projectURL);
+    final screenName = await Scrap.getProjectName(projectJson);
+    final icon = await Scrap.getProjectIcon(projectJson);
+    final url = projectURL;
+
+    final item =
+        ScrapboxProjectPref(projectName: screenName, icon: icon, path: url);
+
+    final pref = await Util.getPrefProjects();
+    pref.add(item);
+
+    setState(() {
+      _list = pref;
+    });
+
+    Util.setPrefProjects(pref);
+    Fluttertoast.showToast(msg: "Added ${item.projectName}");
   }
 
   @override
@@ -88,19 +131,23 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: ListView(
+        child: ListView.builder(
           physics: Const.ListScrollPhysics,
-          children: <Widget>[
-            Project(
-              path: "aioilight",
-            ),
-            Project(
-              path: "help-jp",
-            ),
-            Project(
-              path: "vtuber",
-            ),
-          ],
+          itemBuilder: (context, index) {
+            if (_list == null) {
+              return null;
+            }
+
+            if (index >= _list?.length) {
+              return null;
+            }
+
+            final item = _list[index];
+            return Project(
+                projectName: item?.projectName ?? "Unknown project",
+                icon: item?.icon ?? "",
+                path: item?.path ?? "-");
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(

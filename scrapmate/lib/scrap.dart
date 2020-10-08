@@ -62,6 +62,24 @@ class Scrap {
   }
 }
 
+class ScrapboxProjectPref {
+  ScrapboxProjectPref({this.projectName, this.icon, this.path});
+
+  final String projectName;
+  final String icon;
+  final String path;
+
+  factory ScrapboxProjectPref.fromJson(Map<String, dynamic> json) {
+    return ScrapboxProjectPref(
+        projectName: json['projectName'],
+        icon: json['icon'],
+        path: json['url']);
+  }
+
+  Map<String, dynamic> toJson() =>
+      {'projectName': projectName, 'icon': icon, 'url': path};
+}
+
 class ScrapboxPageListResult {
   ScrapboxPageListResult(
       {this.projectName, this.skip, this.limit, this.count, this.pages});

@@ -5,8 +5,10 @@ import 'package:scrapmate/scrap.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class Project extends StatefulWidget {
-  Project({this.path});
+  Project({this.projectName, this.icon, this.path});
 
+  final String projectName;
+  final String icon;
   final String path;
 
   @override
@@ -16,19 +18,10 @@ class Project extends StatefulWidget {
 class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
-  Future<String> _displayName;
-  Future<String> _icon;
-  String _dispNameResult;
-
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    final result = Scrap.getJsonProject(widget.path);
-    _displayName = Scrap.getProjectName(result);
-    _icon = Scrap.getProjectIcon(result);
-
-    _displayName.then((value) => _dispNameResult = value);
   }
 
   @override
@@ -41,40 +34,17 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: FutureBuilder<String>(
-        future: _icon,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Image(image: CachedNetworkImageProvider(snapshot.data));
-          } else if (snapshot.hasError) {
-            return Icon(Icons.error);
-          }
-          return CircularProgressIndicator();
-        },
-      ),
-      title: FutureBuilder<String>(
-        future: _displayName,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Text(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return Text("Loading...");
-        },
-      ),
+      leading: Image(image: CachedNetworkImageProvider(widget.icon)),
+      title: Text(widget.projectName),
       subtitle: Text(Scrap.getProjectUrl(widget.path)),
       onTap: () => {
-        if (_dispNameResult != null)
-          {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProjectPage(
-                          title: _dispNameResult,
-                          id: widget.path,
-                        )))
-          }
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProjectPage(
+                      title: widget.projectName,
+                      id: widget.path,
+                    )))
       },
     ));
   }
