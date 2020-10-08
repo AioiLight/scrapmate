@@ -38,7 +38,9 @@ class _ScrapPageState extends State<ScrapPage>
       child: ListTile(
         title: Text(widget.title),
         subtitle: widget.thumbnail != null
-            ? Image(image: CachedNetworkImageProvider(widget.thumbnail))
+            ? CachedNetworkImage(
+                imageUrl: widget.thumbnail,
+                errorWidget: (context, url, error) => Text(widget.lead))
             : Text(widget.lead),
       ),
       clipBehavior: Clip.antiAlias,
