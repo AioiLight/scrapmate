@@ -5,11 +5,12 @@ import 'package:scrapmate/scrap.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class Project extends StatefulWidget {
-  Project({this.projectName, this.icon, this.path});
+  Project({this.projectName, this.icon, this.path, this.key});
 
   final String projectName;
   final String icon;
   final String path;
+  final Key key;
 
   @override
   _ProjectState createState() => _ProjectState();

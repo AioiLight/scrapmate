@@ -5,7 +5,6 @@ import 'package:scrapmate/scrap.dart';
 import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/addProjectDialog.dart';
 import 'package:scrapmate/widgets/project.dart';
-import 'package:scrapmate/widgets/scrappage.dart';
 
 void main() {
   runApp(MyApp());
@@ -61,6 +60,20 @@ class _MyHomePageState extends State<MyHomePage>
   AnimationController _controller;
 
   var _list = List<ScrapboxProjectPref>();
+
+  void _onReorder(int oldIndex, int newIndex) {
+    setState(
+      () {
+        if (newIndex > oldIndex) {
+          newIndex -= 1;
+        }
+        final item = _list.removeAt(oldIndex);
+        _list.insert(newIndex, item);
+      },
+    );
+
+    Util.setPrefProjects(_list);
+  }
 
   void _pushedAddProject() async {
     final result = await showDialog<String>(
@@ -131,23 +144,21 @@ class _MyHomePageState extends State<MyHomePage>
       body: Container(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: ListView.builder(
-          physics: Const.ListScrollPhysics,
-          itemBuilder: (context, index) {
+        child: ReorderableListView(
+          scrollDirection: Axis.vertical,
+          onReorder: _onReorder,
+          children: List.generate(_list?.length, (index) {
             if (_list == null) {
               return null;
             }
-
-            if (index >= _list?.length) {
-              return null;
-            }
-
             final item = _list[index];
             return Project(
-                projectName: item?.projectName ?? "Unknown project",
-                icon: item?.icon ?? "",
-                path: item?.path ?? "-");
-          },
+              projectName: item?.projectName ?? "Unknown project",
+              icon: item?.icon ?? "",
+              path: item?.path ?? "-",
+              key: Key(index.toString()),
+            );
+          }),
         ),
       ),
       floatingActionButton: FloatingActionButton(
