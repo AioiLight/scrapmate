@@ -16,7 +16,8 @@ class AddProjectDialog {
             const Text("https://scrapbox.io/"),
             TextField(
               maxLines: 1,
-              decoration: const InputDecoration(hintText: "Project URL"),
+              decoration: const InputDecoration(
+                  hintText: "Project URL (e.g. help, shokai)"),
               onChanged: _textChanged,
               autofocus: true,
             )
