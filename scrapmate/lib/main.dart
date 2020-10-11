@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/scrap.dart';
+import 'package:scrapmate/settings/general.dart';
 import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/addProjectDialog.dart';
 import 'package:scrapmate/widgets/project.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefService.init(prefix: 'pref_');
   runApp(MyApp());
 }
 
@@ -110,6 +114,14 @@ class _MyHomePageState extends State<MyHomePage>
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsGeneral()));
+              })
+        ],
       ),
       body: Container(
         child: ReorderableListView(

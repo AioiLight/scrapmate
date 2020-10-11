@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/scrap.dart';
-import 'package:scrapmate/widgets/project.dart';
+import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/scrappage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProjectPage extends StatefulWidget {
   ProjectPage({Key key, this.title, this.id}) : super(key: key);
@@ -71,8 +73,8 @@ class _ProjectPageState extends State<ProjectPage>
         // in the middle of the parent.
         child: GridView.builder(
           physics: Const.ListScrollPhysics,
-          gridDelegate:
-              new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: PrefService.getInt("grid")),
           itemBuilder: (BuildContext context, int index) {
             if (_itemsResult == null) {
               return null;

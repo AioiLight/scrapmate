@@ -20,4 +20,8 @@ class Util {
 
     pref.setString("projects", json.encode(projects));
   }
+
+  static Future<SharedPreferences> getPrefs() {
+    return SharedPreferences.getInstance();
+  }
 }
