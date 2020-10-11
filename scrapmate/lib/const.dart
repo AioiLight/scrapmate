@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Const {
   static const String AppName = "ScrapMate";
@@ -7,4 +8,15 @@ class Const {
 
   static const ScrollPhysics ListScrollPhysics =
       AlwaysScrollableScrollPhysics();
+
+  static final ThemeData blackTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.black,
+    cardColor: Colors.black,
+    dialogBackgroundColor: Colors.black,
+    dialogTheme: DialogTheme(backgroundColor: Colors.black),
+    appBarTheme: AppBarTheme(color: Colors.black),
+    bottomAppBarColor: Colors.black,
+    backgroundColor: Colors.black,
+    brightness: Brightness.dark,
+  );
 }

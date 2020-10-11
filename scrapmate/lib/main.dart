@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: Const.AppName,
       theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      darkTheme: PrefService.getBool("blackTheme") ?? false
+          ? Const.blackTheme
+          : ThemeData.dark(),
       themeMode: themeMode,
       home: MyHomePage(title: Const.AppName),
     );
