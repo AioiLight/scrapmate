@@ -17,12 +17,21 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeInt = PrefService.getInt("theme");
+
+    var themeMode = ThemeMode.system;
+
+    if (themeInt == 1) {
+      themeMode = ThemeMode.light;
+    } else if (themeInt == 2) {
+      themeMode = ThemeMode.dark;
+    }
+
     return MaterialApp(
       title: Const.AppName,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
       home: MyHomePage(title: Const.AppName),
     );
   }
