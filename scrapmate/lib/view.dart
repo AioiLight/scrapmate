@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'scrap.dart';
 
 class ScrapView extends StatefulWidget {
-  ScrapView({this.title, this.url});
+  ScrapView({this.title, this.projectName});
 
   @override
   _ScrapViewState createState() => _ScrapViewState();
 
   final String title;
-  final String url;
+  final String projectName;
 }
 
 class _ScrapViewState extends State<ScrapView>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  Future<ScrapboxPageResult> _scrapboxPageResult;
+  ScrapboxPageResult _result;
+
+  void _loaded(ScrapboxPageResult result) {
+    setState(() {
+      _result = result;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+
+    _scrapboxPageResult =
+        Scrap.getPage(Scrap.getJsonPages(widget.projectName, widget.title));
+    _scrapboxPageResult.then((value) => _loaded(value));
   }
 
   @override
@@ -34,9 +48,13 @@ class _ScrapViewState extends State<ScrapView>
           title: Text(widget.title),
         ),
         body: Container(
-          child: ListView(
-            children: [SelectableText(widget.url)],
-          ),
-        ));
+            child: _result != null
+                ? ListView(
+                    children: [
+                      SelectableText(
+                          _result.lines.map((e) => e.text).join("\n"))
+                    ],
+                  )
+                : Center(child: CircularProgressIndicator())));
   }
 }

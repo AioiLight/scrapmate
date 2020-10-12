@@ -13,6 +13,20 @@ class Scrap {
     return http.get(uri);
   }
 
+  static Future<Map<String, dynamic>> getJsonPages(
+      String projectPath, String pageName) async {
+    final url = "/api/pages/$projectPath/$pageName";
+
+    final response = await fetch(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> j = json.decode(response.body);
+      return j;
+    } else {
+      throw Exception("Unable to get page infomations.");
+    }
+  }
+
   static Future<Map<String, dynamic>> getJsonUserTop(String projectPath,
       {int skip = 0, int limit = 20}) async {
     final url = "/api/pages/$projectPath";
@@ -59,6 +73,14 @@ class Scrap {
     final result = ScrapboxPageListResult.fromJson(j);
 
     return result.pages;
+  }
+
+  static Future<ScrapboxPageResult> getPage(
+      Future<Map<String, dynamic>> json) async {
+    final j = await json;
+    final result = ScrapboxPageResult.fromJson(j);
+
+    return result;
   }
 }
 
@@ -158,5 +180,40 @@ class ScrapboxPageListResultPage {
       accessed: json['accessed'],
       snapshotCreated: json['snapshotCreated'],
     );
+  }
+}
+
+class ScrapboxPageResult extends ScrapboxPageListResultPage {
+  ScrapboxPageResult({this.persistent, this.lines});
+
+  final bool persistent;
+  final List<ScrapboxPageResultLines> lines;
+
+  factory ScrapboxPageResult.fromJson(Map<String, dynamic> json) {
+    var lineList = json['lines'] as List;
+    return ScrapboxPageResult(
+        persistent: json['persistent'],
+        lines:
+            lineList.map((e) => ScrapboxPageResultLines.fromJson(e)).toList());
+  }
+}
+
+class ScrapboxPageResultLines {
+  ScrapboxPageResultLines(
+      {this.id, this.text, this.userId, this.created, this.updated});
+
+  final String id;
+  final String text;
+  final String userId;
+  final int created;
+  final int updated;
+
+  factory ScrapboxPageResultLines.fromJson(Map<String, dynamic> json) {
+    return ScrapboxPageResultLines(
+        id: json['id'],
+        text: json['text'],
+        userId: json['userId'],
+        created: json['created'],
+        updated: json['updated']);
   }
 }

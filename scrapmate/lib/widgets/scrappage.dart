@@ -49,9 +49,7 @@ class _ScrapPageState extends State<ScrapPage>
               context,
               MaterialPageRoute(
                   builder: (context) => ScrapView(
-                      title: widget.title,
-                      url: (Scrap.getProjectUrl(widget.projectUrl) +
-                          widget.title))))
+                      title: widget.title, projectName: widget.projectUrl)))
         },
       ),
       clipBehavior: Clip.antiAlias,
