@@ -95,6 +95,7 @@ class _ProjectPageState extends State<ProjectPage>
               title: item.title,
               lead: item.descriptions.join("\n"),
               thumbnail: item.image,
+              projectUrl: widget.id,
             );
           },
         ),
