@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scrapmate/const.dart';
+import 'package:scrapmate/parser.dart';
 import 'scrap.dart';
 
 class ScrapView extends StatefulWidget {
@@ -50,10 +52,8 @@ class _ScrapViewState extends State<ScrapView>
         body: Container(
             child: _result != null
                 ? ListView(
-                    children: [
-                      SelectableText(
-                          _result.lines.map((e) => e.text).join("\n"))
-                    ],
+                    children: Parser.parse(_result),
+                    padding: Const.Edge,
                   )
                 : Center(child: CircularProgressIndicator())));
   }
