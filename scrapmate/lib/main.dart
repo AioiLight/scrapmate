@@ -12,6 +12,7 @@ import 'package:scrapmate/widgets/project.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefService.init(prefix: 'pref_');
+  PrefService.setDefaultValues({"theme": 0, "blackTheme": false, "grid": 3});
   runApp(MyApp());
 }
 
