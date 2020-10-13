@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
@@ -134,24 +135,28 @@ class _MyHomePageState extends State<MyHomePage>
               })
         ],
       ),
-      body: Container(
-        child: ReorderableListView(
-          scrollDirection: Axis.vertical,
-          onReorder: _onReorder,
-          children: List.generate(_list?.length, (index) {
-            if (_list == null) {
-              return null;
-            }
-            final item = _list[index];
-            return Project(
-              projectName: item?.projectName ?? "Unknown project",
-              icon: item?.icon ?? "",
-              path: item?.path ?? "-",
-              key: Key(index.toString()),
-            );
-          }),
-        ),
-      ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: constraints.maxHeight),
+              child: ReorderableListView(
+                  scrollDirection: Axis.vertical,
+                  onReorder: _onReorder,
+                  children: List.generate(_list?.length, (index) {
+                    if (_list == null) {
+                      return null;
+                    }
+                    final item = _list[index];
+                    return Project(
+                      projectName: item?.projectName ?? "Unknown project",
+                      icon: item?.icon ?? null,
+                      path: item?.path ?? "-",
+                      key: Key(index.toString()),
+                    );
+                  }))),
+          physics: Const.ListScrollPhysics,
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: _pushedAddProject,
         tooltip: 'Add project',
