@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/scrap.dart';
 import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/scrappage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectPage extends StatefulWidget {
   ProjectPage({Key key, this.title, this.id}) : super(key: key);
@@ -47,6 +50,19 @@ class _ProjectPageState extends State<ProjectPage>
     _loading = false;
   }
 
+  void _openShare() {
+    Share.share('${widget.title} - ${Scrap.getProjectUrl(widget.id)}');
+  }
+
+  void _openBrowser() async {
+    final url = Scrap.getProjectUrl(widget.id);
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(msg: "Unable to open browser");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -67,6 +83,10 @@ class _ProjectPageState extends State<ProjectPage>
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(icon: Icon(Icons.share), onPressed: _openShare),
+          IconButton(icon: Icon(Icons.open_in_browser), onPressed: _openBrowser)
+        ],
       ),
       body: Container(
         // Center is a layout widget. It takes a single child and positions it
