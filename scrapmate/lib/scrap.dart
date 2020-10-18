@@ -7,6 +7,10 @@ class Scrap {
     return "https://scrapbox.io/$projectPath/";
   }
 
+  static String getPageUrl(String projectPath, String pageName) {
+    return "${getProjectUrl(projectPath)}$pageName";
+  }
+
   static Future<http.Response> fetch(String path,
       {Map<String, String> params}) {
     final uri = Uri.https("scrapbox.io", path, params);

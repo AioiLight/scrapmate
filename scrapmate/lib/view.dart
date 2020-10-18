@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/parser.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'scrap.dart';
 
 class ScrapView extends StatefulWidget {
@@ -27,6 +30,20 @@ class _ScrapViewState extends State<ScrapView>
     });
   }
 
+  void _openShare() {
+    Share.share(
+        '${widget.title} - ${Scrap.getPageUrl(widget.projectName, widget.title)}');
+  }
+
+  void _openBrowser() async {
+    final url = Scrap.getPageUrl(widget.projectName, widget.title);
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(msg: "Unable to open browser");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -48,6 +65,11 @@ class _ScrapViewState extends State<ScrapView>
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          actions: [
+            IconButton(icon: Icon(Icons.share), onPressed: _openShare),
+            IconButton(
+                icon: Icon(Icons.open_in_browser), onPressed: _openBrowser)
+          ],
         ),
         body: Container(
             child: _result != null
