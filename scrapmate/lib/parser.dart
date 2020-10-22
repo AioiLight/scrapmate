@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:scrapmate/const.dart';
@@ -111,6 +112,11 @@ class ScrapText extends ScrapLine {
           print("装飾: ${deco.group(2)}");
         } else if (first == link) {
           // リンク
+          final style = TextStyle(
+              color: Colors.accents.first,
+              decoration: TextDecoration.underline);
+          list.add(TextSpan(children: _getSpan(link.group(1), style: style)));
+          print("リンク: ${link.group(1)}");
         }
         str = str.substring(first.end);
       }
