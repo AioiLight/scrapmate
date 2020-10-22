@@ -86,6 +86,11 @@ class Scrap {
 
     return result;
   }
+
+  static final decoration = RegExp(r"\[([*/-]+) (.+?)\]");
+  static final link = RegExp(r"\[[^*/-](.+ ?)\]");
+  static final titledLink = RegExp(r"(.+) (.+)");
+  static final url = RegExp(r"https?://[\w/:%#\$&\?\(\)~\.=\+\-]+");
 }
 
 class ScrapboxProjectPref {
