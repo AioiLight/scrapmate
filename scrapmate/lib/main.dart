@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeInt = PrefService.getInt("theme");
 
+    Const.defaultFontSize = Theme.of(context).textTheme.bodyText1.fontSize;
+
     var themeMode = ThemeMode.system;
 
     if (themeInt == 1) {

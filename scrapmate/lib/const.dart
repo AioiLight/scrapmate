@@ -6,6 +6,8 @@ class Const {
 
   static const EdgeInsets Edge = EdgeInsets.all(10.0);
 
+  static double defaultFontSize;
+
   static const ScrollPhysics ListScrollPhysics =
       AlwaysScrollableScrollPhysics();
 

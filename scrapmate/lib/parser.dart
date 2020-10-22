@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:scrapmate/const.dart';
 import 'scrap.dart';
 
 class Parser {
@@ -121,7 +122,7 @@ class ScrapText extends ScrapLine {
   TextStyle _getParseText(Decorations d) {
     var fontWeight = FontWeight.normal;
     var fontStyle = FontStyle.normal;
-    var fontSize = 12.0;
+    var fontSize = Const.defaultFontSize;
     var decoration = TextDecoration.none;
 
     if (d.strong > 0) {
