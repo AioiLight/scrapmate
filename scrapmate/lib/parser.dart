@@ -115,7 +115,8 @@ class ScrapText extends ScrapLine {
           final style = TextStyle(
               color: Colors.accents.first,
               decoration: TextDecoration.underline);
-          list.add(TextSpan(children: _getSpan(link.group(1), style: style)));
+          list.add(TextSpan(
+              children: _getSpan(link.group(1) + link.group(2), style: style)));
           print("リンク: ${link.group(1)}");
         }
         str = str.substring(first.end);
