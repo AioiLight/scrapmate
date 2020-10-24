@@ -66,9 +66,16 @@ class _ScrapViewState extends State<ScrapView>
         appBar: AppBar(
           title: Text(widget.title),
           actions: [
-            IconButton(icon: Icon(Icons.share), onPressed: _openShare),
             IconButton(
-                icon: Icon(Icons.open_in_browser), onPressed: _openBrowser)
+              icon: Icon(Icons.share),
+              onPressed: _openShare,
+              tooltip: "Share",
+            ),
+            IconButton(
+              icon: Icon(Icons.open_in_browser),
+              onPressed: _openBrowser,
+              tooltip: "Open in browser",
+            )
           ],
         ),
         body: Container(
