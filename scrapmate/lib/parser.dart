@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/widgets/telomere.dart';
 import 'scrap.dart';
 
 class Parser {
@@ -26,15 +27,29 @@ class Parser {
         final codes = _getUtilUnIndent(scrap, i, indent);
         i += codes.length - 1;
 
-        l = ScrapCode(indent,
+        l = ScrapCode(indent, line,
             lang: codes.first.text.substring("code:".length),
             codes: codes.skip(1).map((e) => e.text).toList());
       } else {
         // ただの段落。
-        l = ScrapText(indent, text: text);
+        l = ScrapText(indent, line, text: text);
       }
 
-      result.add(l.generate());
+      final lineWidget = l.generate();
+
+      result.add(Stack(
+        children: [
+          Positioned(child: Telomere(l.info.updated), top: 0, bottom: 0),
+          Row(
+            children: [
+              Container(
+                width: 16 + 1.0 * indent * 8,
+              ),
+              lineWidget
+            ],
+          )
+        ],
+      ));
     }
 
     return result;
@@ -63,15 +78,17 @@ class Parser {
 }
 
 abstract class ScrapLine {
-  ScrapLine(this.level);
+  ScrapLine(this.level, this.info);
 
   Widget generate();
 
   final int level;
+  final ScrapboxPageResultLines info;
 }
 
 class ScrapText extends ScrapLine {
-  ScrapText(int level, {this.text}) : super(level);
+  ScrapText(int level, ScrapboxPageResultLines info, {this.text})
+      : super(level, info);
 
   final String text;
 
@@ -181,7 +198,8 @@ class ScrapText extends ScrapLine {
 }
 
 class ScrapCode extends ScrapLine {
-  ScrapCode(int level, {this.lang, this.codes}) : super(level);
+  ScrapCode(int level, ScrapboxPageResultLines info, {this.lang, this.codes})
+      : super(level, info);
 
   final String lang;
   final List<String> codes;
