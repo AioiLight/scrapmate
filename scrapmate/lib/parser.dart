@@ -194,7 +194,10 @@ class ScrapText extends ScrapLine {
 
   Widget generate() {
     return Flexible(
-        child: SelectableText.rich(TextSpan(children: _getSpan(text))));
+        child: SelectableText.rich(
+      TextSpan(children: _getSpan(text)),
+      style: TextStyle(height: 1.8),
+    ));
   }
 }
 
