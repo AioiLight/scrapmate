@@ -39,11 +39,11 @@ class _SettingsGeneralState extends State<SettingsGeneral>
           SwitchPreference("Black theme", "blackTheme",
               desc: "Use pure black background color when using dark theme",
               defaultVal: false),
+          PreferenceTitle("Scrapbox"),
           DropdownPreference("Number of grid columns", "grid",
               desc: "Number of grid columns in project page",
               defaultVal: 3,
               values: [1, 2, 3, 4, 5]),
-          PreferenceTitle("Scrapbox"),
           SwitchPreference("Telomere", "telomere",
               desc: "Show a telomere beside the paragraph", defaultVal: true),
         ]));
