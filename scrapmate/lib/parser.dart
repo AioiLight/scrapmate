@@ -210,7 +210,7 @@ class ScrapCode extends ScrapLine {
 
   Widget generate() {
     final md = "```$lang\n" + codes.join("\n") + "\n```";
-    return MarkdownBody(data: md, selectable: true);
+    return Flexible(child: MarkdownBody(data: md, selectable: true));
   }
 }
 
