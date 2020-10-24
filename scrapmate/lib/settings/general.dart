@@ -43,6 +43,9 @@ class _SettingsGeneralState extends State<SettingsGeneral>
               desc: "Number of grid columns in project page",
               defaultVal: 3,
               values: [1, 2, 3, 4, 5]),
+          PreferenceTitle("Scrapbox"),
+          SwitchPreference("Telomere", "telomere",
+              desc: "Show a telomere beside the paragraph", defaultVal: true),
         ]));
   }
 }

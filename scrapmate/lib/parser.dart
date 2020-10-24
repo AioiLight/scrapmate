@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/widgets/telomere.dart';
 import 'scrap.dart';
@@ -39,7 +40,8 @@ class Parser {
 
       result.add(Stack(
         children: [
-          Positioned(child: Telomere(l.info.updated), top: 0, bottom: 0),
+          if (PrefService.getBool("telomere"))
+            Positioned(child: Telomere(l.info.updated), top: 0, bottom: 0),
           Row(
             children: [
               Container(
