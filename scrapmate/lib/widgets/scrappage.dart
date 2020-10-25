@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/scrap.dart';
+import 'package:scrapmate/util.dart';
 import 'package:scrapmate/view.dart';
 
 class ScrapPage extends StatefulWidget {
@@ -44,13 +45,8 @@ class _ScrapPageState extends State<ScrapPage>
                 imageUrl: widget.thumbnail,
                 errorWidget: (context, url, error) => Text(widget.lead))
             : Text(widget.lead),
-        onTap: () => {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ScrapView(
-                      title: widget.title, projectName: widget.projectUrl)))
-        },
+        onTap: () =>
+            Util.openScrapPage(context, widget.title, widget.projectUrl),
       ),
       clipBehavior: Clip.antiAlias,
     );
