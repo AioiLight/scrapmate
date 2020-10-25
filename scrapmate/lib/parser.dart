@@ -166,6 +166,9 @@ class ScrapText extends ScrapLine {
                   style: style,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => Util.openBrowser(titled.group(1)));
+            } else {
+              // どちらもリンクじゃない = スペースのある内部リンク
+              span = TextSpan(children: _getSpan(content, style: style));
             }
           } else if (url != null) {
             span = TextSpan(
@@ -174,9 +177,7 @@ class ScrapText extends ScrapLine {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => Util.openBrowser(url.input));
           } else {
-            span = TextSpan(
-                children:
-                    _getSpan(link.group(1) + link.group(2), style: style));
+            span = TextSpan(children: _getSpan(content, style: style));
           }
 
           if (span != null) {
