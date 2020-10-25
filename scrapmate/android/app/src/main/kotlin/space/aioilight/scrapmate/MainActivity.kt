@@ -1,4 +1,4 @@
-package com.example.scrapmate
+package space.aioilight.scrapmate
 
 import io.flutter.embedding.android.FlutterActivity
 
