@@ -72,7 +72,8 @@ class _ScrapViewState extends State<ScrapView>
         body: Container(
             child: _result != null
                 ? ListView(
-                    children: Parser.parse(_result),
+                    children:
+                        Parser.parse(_result, context, widget.projectName),
                     padding: Const.Edge,
                   )
                 : Center(child: CircularProgressIndicator())));

@@ -9,7 +9,8 @@ import 'package:scrapmate/widgets/telomere.dart';
 import 'scrap.dart';
 
 class Parser {
-  static List<Widget> parse(ScrapboxPageResult scrap) {
+  static List<Widget> parse(
+      ScrapboxPageResult scrap, BuildContext context, String projectDir) {
     final result = List<Widget>();
 
     // タイトル行スキップ
@@ -28,12 +29,12 @@ class Parser {
         final codes = _getUtilUnIndent(scrap, i, indent);
         i += codes.length - 1;
 
-        l = ScrapCode(indent, line,
+        l = ScrapCode(indent, line, context, projectDir,
             lang: codes.first.text.substring("code:".length),
             codes: codes.skip(1).map((e) => e.text).toList());
       } else {
         // ただの段落。
-        l = ScrapText(indent, line, text: text);
+        l = ScrapText(indent, line, context, projectDir, text: text);
       }
 
       final lineWidget = l.generate();
@@ -80,17 +81,21 @@ class Parser {
 }
 
 abstract class ScrapLine {
-  ScrapLine(this.level, this.info);
+  ScrapLine(this.level, this.info, this.context, this.projectDir);
 
   Widget generate();
 
   final int level;
   final ScrapboxPageResultLines info;
+  final BuildContext context;
+  final String projectDir;
 }
 
 class ScrapText extends ScrapLine {
-  ScrapText(int level, ScrapboxPageResultLines info, {this.text})
-      : super(level, info);
+  ScrapText(int level, ScrapboxPageResultLines info, BuildContext context,
+      String projectDir,
+      {this.text})
+      : super(level, info, context, projectDir);
 
   final String text;
 
@@ -168,7 +173,7 @@ class ScrapText extends ScrapLine {
                     ..onTap = () => Util.openBrowser(titled.group(1)));
             } else {
               // どちらもリンクじゃない = スペースのある内部リンク
-              span = TextSpan(children: _getSpan(content, style: style));
+              span = _getInternalLinkSpan(content, style, context, projectDir);
             }
           } else if (url != null) {
             span = TextSpan(
@@ -177,7 +182,7 @@ class ScrapText extends ScrapLine {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => Util.openBrowser(url.input));
           } else {
-            span = TextSpan(children: _getSpan(content, style: style));
+            span = _getInternalLinkSpan(content, style, context, projectDir);
           }
 
           if (span != null) {
@@ -241,6 +246,16 @@ class ScrapText extends ScrapLine {
     return d;
   }
 
+  TextSpan _getInternalLinkSpan(String content, TextStyle style,
+      BuildContext context, String projectDir) {
+    return TextSpan(
+      text: content,
+      style: style,
+      recognizer: TapGestureRecognizer()
+        ..onTap = () => Util.openScrapPage(context, content, projectDir),
+    );
+  }
+
   Widget generate() {
     return Flexible(
         child: SelectableText.rich(
@@ -251,8 +266,10 @@ class ScrapText extends ScrapLine {
 }
 
 class ScrapCode extends ScrapLine {
-  ScrapCode(int level, ScrapboxPageResultLines info, {this.lang, this.codes})
-      : super(level, info);
+  ScrapCode(int level, ScrapboxPageResultLines info, BuildContext context,
+      String projectDir,
+      {this.lang, this.codes})
+      : super(level, info, context, projectDir);
 
   final String lang;
   final List<String> codes;
