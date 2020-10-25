@@ -59,21 +59,26 @@ class _ScrapViewState extends State<ScrapView>
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(args.pageTitle),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.share),
-              onPressed: () => {_openShare(args)},
-              tooltip: "Share",
-            ),
-            IconButton(
-              icon: Icon(Icons.open_in_browser),
-              onPressed: () => Util.openBrowser(
-                  Scrap.getPageUrl(args.projectDir, args.pageTitle)),
-              tooltip: "Open in browser",
-            )
-          ],
-        ),
+            title: Text(args.pageTitle),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () => {_openShare(args)},
+                tooltip: "Share",
+              ),
+              IconButton(
+                icon: Icon(Icons.open_in_browser),
+                onPressed: () => Util.openBrowser(
+                    Scrap.getPageUrl(args.projectDir, args.pageTitle)),
+                tooltip: "Open in browser",
+              )
+            ],
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName("/project"));
+              },
+            )),
         body: Container(
             child: _result != null
                 ? ListView(
