@@ -1,10 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:scrapmate/const.dart';
-import 'package:scrapmate/scrap.dart';
 import 'package:scrapmate/util.dart';
-import 'package:scrapmate/view.dart';
 
 class ScrapPage extends StatefulWidget {
   ScrapPage({this.title, this.lead, this.thumbnail, this.id, this.projectUrl});

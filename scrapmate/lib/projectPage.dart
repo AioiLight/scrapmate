@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/scrap.dart';
 import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/scrappage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProjectPage extends StatefulWidget {
   ProjectPage({Key key, this.title, this.id}) : super(key: key);

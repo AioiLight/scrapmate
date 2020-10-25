@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:preferences/preferences.dart';
-import 'package:scrapmate/const.dart';
 
 class SettingsGeneral extends StatefulWidget {
   @override
