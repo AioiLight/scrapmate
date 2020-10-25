@@ -39,13 +39,13 @@ class Util {
   }
 
   static void openScrapPage(
-      BuildContext context, String title, String projectName) {
+      BuildContext context, String title, String projectDir) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ScrapView(
                   title: title,
-                  projectName: projectName,
+                  projectName: projectDir,
                 )));
   }
 }
