@@ -3,9 +3,11 @@ import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/scrap.dart';
 import 'package:scrapmate/settings/general.dart';
 import 'package:scrapmate/util.dart';
+import 'package:scrapmate/view.dart';
 import 'package:scrapmate/widgets/addProjectDialog.dart';
 import 'package:scrapmate/widgets/project.dart';
 
@@ -39,7 +41,13 @@ class MyApp extends StatelessWidget {
           ? Const.blackTheme
           : ThemeData.dark(),
       themeMode: themeMode,
-      home: MyHomePage(title: Const.AppName),
+      initialRoute: "/",
+      routes: {
+        "/": (BuildContext context) => MyHomePage(title: Const.AppName),
+        "/project": (BuildContext context) => ProjectPage(),
+        "/view": (BuildContext context) => ScrapView(),
+        "/setting": (BuildContext context) => SettingsGeneral(),
+      },
     );
   }
 }
@@ -134,8 +142,7 @@ class _MyHomePageState extends State<MyHomePage>
           IconButton(
               icon: Icon(Icons.settings),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsGeneral()));
+                Navigator.pushNamed(context, "/setting");
               })
         ],
       ),

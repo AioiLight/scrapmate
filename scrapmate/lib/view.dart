@@ -7,13 +7,10 @@ import 'package:share/share.dart';
 import 'scrap.dart';
 
 class ScrapView extends StatefulWidget {
-  ScrapView({this.title, this.projectName});
+  ScrapView({Key key}) : super(key: key);
 
   @override
   _ScrapViewState createState() => _ScrapViewState();
-
-  final String title;
-  final String projectName;
 }
 
 class _ScrapViewState extends State<ScrapView>
@@ -29,18 +26,24 @@ class _ScrapViewState extends State<ScrapView>
     });
   }
 
-  void _openShare() {
+  void _openShare(ScrapViewArgs args) {
     Share.share(
-        '${widget.title} - ${Scrap.getPageUrl(widget.projectName, widget.title)}');
+        '${args.pageTitle} - ${Scrap.getPageUrl(args.projectDir, args.pageTitle)}');
   }
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context).settings.arguments as ScrapViewArgs;
 
     _scrapboxPageResult =
-        Scrap.getPage(Scrap.getJsonPages(widget.projectName, widget.title));
+        Scrap.getPage(Scrap.getJsonPages(args.projectDir, args.pageTitle));
     _scrapboxPageResult.then((value) => _loaded(value));
   }
 
@@ -52,19 +55,21 @@ class _ScrapViewState extends State<ScrapView>
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments as ScrapViewArgs;
+
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(args.pageTitle),
           actions: [
             IconButton(
               icon: Icon(Icons.share),
-              onPressed: _openShare,
+              onPressed: () => {_openShare(args)},
               tooltip: "Share",
             ),
             IconButton(
               icon: Icon(Icons.open_in_browser),
               onPressed: () => Util.openBrowser(
-                  Scrap.getPageUrl(widget.projectName, widget.title)),
+                  Scrap.getPageUrl(args.projectDir, args.pageTitle)),
               tooltip: "Open in browser",
             )
           ],
@@ -72,10 +77,16 @@ class _ScrapViewState extends State<ScrapView>
         body: Container(
             child: _result != null
                 ? ListView(
-                    children:
-                        Parser.parse(_result, context, widget.projectName),
+                    children: Parser.parse(_result, context, args.projectDir),
                     padding: Const.Edge,
                   )
                 : Center(child: CircularProgressIndicator())));
   }
+}
+
+class ScrapViewArgs {
+  ScrapViewArgs(this.pageTitle, this.projectDir);
+
+  final String pageTitle;
+  final String projectDir;
 }

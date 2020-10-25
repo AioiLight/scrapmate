@@ -35,23 +35,19 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: widget.icon != null
-          ? CachedNetworkImage(
-              imageUrl: widget.icon,
-              width: 64,
-              errorWidget: (context, url, error) => Icon(Icons.error, size: 64))
-          : Icon(Icons.error, size: 64),
-      title: Text(widget.projectName),
-      subtitle: Text(Scrap.getProjectUrl(widget.path)),
-      onTap: () => {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ProjectPage(
-                      title: widget.projectName,
-                      id: widget.path,
-                    )))
-      },
-    ));
+            leading: widget.icon != null
+                ? CachedNetworkImage(
+                    imageUrl: widget.icon,
+                    width: 64,
+                    errorWidget: (context, url, error) =>
+                        Icon(Icons.error, size: 64))
+                : Icon(Icons.error, size: 64),
+            title: Text(widget.projectName),
+            subtitle: Text(Scrap.getProjectUrl(widget.path)),
+            onTap: () => {
+                  Navigator.pushNamed(context, "/project",
+                      arguments:
+                          ProjectPageArgs(widget.projectName, widget.path))
+                }));
   }
 }

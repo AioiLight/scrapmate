@@ -7,10 +7,7 @@ import 'package:scrapmate/widgets/scrappage.dart';
 import 'package:share/share.dart';
 
 class ProjectPage extends StatefulWidget {
-  ProjectPage({Key key, this.title, this.id}) : super(key: key);
-
-  final String title;
-  final String id;
+  ProjectPage({Key key}) : super(key: key);
 
   @override
   _ProjectPageState createState() => _ProjectPageState();
@@ -30,7 +27,7 @@ class _ProjectPageState extends State<ProjectPage>
     });
   }
 
-  Future<void> _loadmore() async {
+  Future<void> _loadmore(ProjectPageArgs args) async {
     if (_loading) {
       return null;
     }
@@ -38,7 +35,7 @@ class _ProjectPageState extends State<ProjectPage>
     _loading = true;
 
     final newPages = await Scrap.getPages(
-        Scrap.getJsonUserTop(widget.id, skip: _itemsResult.length));
+        Scrap.getJsonUserTop(args.dir, skip: _itemsResult.length));
 
     setState(() {
       _itemsResult.addAll(newPages);
@@ -47,16 +44,22 @@ class _ProjectPageState extends State<ProjectPage>
     _loading = false;
   }
 
-  void _openShare() {
-    Share.share('${widget.title} - ${Scrap.getProjectUrl(widget.id)}');
+  void _openShare(ProjectPageArgs args) {
+    Share.share('${args.title} - ${Scrap.getProjectUrl(args.dir)}');
   }
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+  }
 
-    _items = Scrap.getPages(Scrap.getJsonUserTop(widget.id));
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
+    _items = Scrap.getPages(Scrap.getJsonUserTop(args.dir));
     _items.then((value) => _loaded(value));
   }
 
@@ -68,18 +71,20 @@ class _ProjectPageState extends State<ProjectPage>
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(args.title),
         actions: [
           IconButton(
             icon: Icon(Icons.share),
-            onPressed: _openShare,
+            onPressed: () => {_openShare(args)},
             tooltip: "Share",
           ),
           IconButton(
             icon: Icon(Icons.open_in_browser),
-            onPressed: () => Util.openBrowser(Scrap.getProjectUrl(widget.id)),
+            onPressed: () => Util.openBrowser(Scrap.getProjectUrl(args.dir)),
             tooltip: "Open in browser",
           )
         ],
@@ -97,7 +102,7 @@ class _ProjectPageState extends State<ProjectPage>
             }
 
             if (index == _itemsResult.length) {
-              _loadmore();
+              _loadmore(args);
               return const CircularProgressIndicator();
             }
 
@@ -111,11 +116,18 @@ class _ProjectPageState extends State<ProjectPage>
               title: item.title,
               lead: item.descriptions.join("\n"),
               thumbnail: item.image,
-              projectUrl: widget.id,
+              projectUrl: args.dir,
             );
           },
         ),
       ),
     );
   }
+}
+
+class ProjectPageArgs {
+  ProjectPageArgs(this.title, this.dir);
+
+  final String title;
+  final String dir;
 }
