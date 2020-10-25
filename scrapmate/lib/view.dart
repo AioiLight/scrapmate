@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/parser.dart';
+import 'package:scrapmate/util.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'scrap.dart';
@@ -35,15 +36,6 @@ class _ScrapViewState extends State<ScrapView>
         '${widget.title} - ${Scrap.getPageUrl(widget.projectName, widget.title)}');
   }
 
-  void _openBrowser() async {
-    final url = Scrap.getPageUrl(widget.projectName, widget.title);
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      Fluttertoast.showToast(msg: "Unable to open browser");
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -73,7 +65,8 @@ class _ScrapViewState extends State<ScrapView>
             ),
             IconButton(
               icon: Icon(Icons.open_in_browser),
-              onPressed: _openBrowser,
+              onPressed: () => Util.openBrowser(
+                  Scrap.getPageUrl(widget.projectName, widget.title)),
               tooltip: "Open in browser",
             )
           ],

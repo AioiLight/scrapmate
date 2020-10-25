@@ -54,15 +54,6 @@ class _ProjectPageState extends State<ProjectPage>
     Share.share('${widget.title} - ${Scrap.getProjectUrl(widget.id)}');
   }
 
-  void _openBrowser() async {
-    final url = Scrap.getProjectUrl(widget.id);
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      Fluttertoast.showToast(msg: "Unable to open browser");
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -91,7 +82,7 @@ class _ProjectPageState extends State<ProjectPage>
           ),
           IconButton(
             icon: Icon(Icons.open_in_browser),
-            onPressed: _openBrowser,
+            onPressed: () => Util.openBrowser(Scrap.getProjectUrl(widget.id)),
             tooltip: "Open in browser",
           )
         ],

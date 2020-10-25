@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'scrap.dart';
 
@@ -23,5 +25,13 @@ class Util {
 
   static Future<SharedPreferences> getPrefs() {
     return SharedPreferences.getInstance();
+  }
+
+  static void openBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(msg: "Unable to open browser");
+    }
   }
 }

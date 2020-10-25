@@ -1,14 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/telomere.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'scrap.dart';
 
 class Parser {
@@ -154,28 +151,28 @@ class ScrapText extends ScrapLine {
                   text: titled.group(2),
                   style: style,
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _openBrowser(titled.group(1)));
+                    ..onTap = () => Util.openBrowser(titled.group(1)));
             } else if (after) {
               // 後ろがリンクっぽい = 後ろがリンクになる
               span = TextSpan(
                   text: titled.group(1),
                   style: style,
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _openBrowser(titled.group(2)));
+                    ..onTap = () => Util.openBrowser(titled.group(2)));
             } else if (before) {
               // 前がリンクっぽい = 前がリンクになる
               span = TextSpan(
                   text: titled.group(2),
                   style: style,
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _openBrowser(titled.group(1)));
+                    ..onTap = () => Util.openBrowser(titled.group(1)));
             }
           } else if (url != null) {
             span = TextSpan(
                 text: url.input,
                 style: style,
                 recognizer: TapGestureRecognizer()
-                  ..onTap = () => _openBrowser(url.input));
+                  ..onTap = () => Util.openBrowser(url.input));
           } else {
             span = TextSpan(
                 children:
@@ -241,14 +238,6 @@ class ScrapText extends ScrapLine {
     });
 
     return d;
-  }
-
-  void _openBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      Fluttertoast.showToast(msg: "Unable to open browser");
-    }
   }
 
   Widget generate() {
