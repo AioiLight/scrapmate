@@ -130,6 +130,7 @@ class _ProjectPageState extends State<ProjectPage>
                     lead: item.descriptions.join("\n"),
                     thumbnail: item.image,
                     projectUrl: args.dir,
+                    pin: item.pin > 0,
                   );
                 },
               )

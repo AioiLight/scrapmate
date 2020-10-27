@@ -4,13 +4,20 @@ import 'package:flutter/widgets.dart';
 import 'package:scrapmate/util.dart';
 
 class ScrapPage extends StatefulWidget {
-  ScrapPage({this.title, this.lead, this.thumbnail, this.id, this.projectUrl});
+  ScrapPage(
+      {this.title,
+      this.lead,
+      this.thumbnail,
+      this.id,
+      this.projectUrl,
+      this.pin});
 
   final String title;
   final String lead;
   final String thumbnail;
   final String id;
   final String projectUrl;
+  final bool pin;
 
   @override
   _ScrapPageState createState() => _ScrapPageState();
@@ -35,16 +42,24 @@ class _ScrapPageState extends State<ScrapPage>
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-        title: Text(widget.title),
-        subtitle: widget.thumbnail != null
-            ? CachedNetworkImage(
-                imageUrl: widget.thumbnail,
-                errorWidget: (context, url, error) => Text(widget.lead))
-            : Text(widget.lead),
-        onTap: () =>
-            Util.openScrapPage(context, widget.title, widget.projectUrl),
-      ),
+      child: Stack(children: [
+        ListTile(
+          title: Text(widget.title),
+          subtitle: widget.thumbnail != null
+              ? CachedNetworkImage(
+                  imageUrl: widget.thumbnail,
+                  errorWidget: (context, url, error) => Text(widget.lead))
+              : Text(widget.lead),
+          onTap: () =>
+              Util.openScrapPage(context, widget.title, widget.projectUrl),
+        ),
+        if (widget.pin)
+          Positioned(
+            child: Icon(Icons.push_pin),
+            right: 0,
+            bottom: 0,
+          )
+      ]),
       clipBehavior: Clip.antiAlias,
     );
   }
