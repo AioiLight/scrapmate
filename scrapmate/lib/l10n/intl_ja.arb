@@ -1,18 +1,17 @@
 {
     "@@locale": "ja",
-
-    "settings": "Settings",
-    "settings_looks": "Looks",
-    "settings_theme": "Theme",
-    "settings_theme_desc": "ScrapMate's theme",
-    "settings_theme_default": "Follow system",
-    "settings_theme_light": "Light",
-    "settings_theme_dark": "Dark",
-    "settings_black_theme": "Black theme",
-    "settings_black_theme_desc": "Use pure black background color when using dark theme",
+    "settings": "設定",
+    "settings_looks": "見た目",
+    "settings_theme": "テーマ",
+    "settings_theme_desc": "ScrapMate のテーマ",
+    "settings_theme_default": "システムに従う",
+    "settings_theme_light": "ライト",
+    "settings_theme_dark": "ダーク",
+    "settings_black_theme": "ブラックテーマ",
+    "settings_black_theme_desc": "ダークテーマを使用するときは真っ黒の背景色を使用する",
     "settings_scrapbox": "Scrapbox",
-    "settings_grid": "Number of grid columns",
-    "settings_grid_desc": "Number of grid columns in project page",
-    "settings_telomere": "Telomere",
-    "settings_telomere_desc": "Show a telomere beside the paragraph"
+    "settings_grid": "グリッドの列数",
+    "settings_grid_desc": "プロジェクトページのグリッドの列数",
+    "settings_telomere": "テロメア",
+    "settings_telomere_desc": "段落の横にテロメアを表示する"
 }

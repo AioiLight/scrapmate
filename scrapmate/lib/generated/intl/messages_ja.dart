@@ -21,19 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
-    "settings_black_theme" : MessageLookupByLibrary.simpleMessage("Black theme"),
-    "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("Use pure black background color when using dark theme"),
-    "settings_grid" : MessageLookupByLibrary.simpleMessage("Number of grid columns"),
-    "settings_grid_desc" : MessageLookupByLibrary.simpleMessage("Number of grid columns in project page"),
-    "settings_looks" : MessageLookupByLibrary.simpleMessage("Looks"),
+    "settings" : MessageLookupByLibrary.simpleMessage("設定"),
+    "settings_black_theme" : MessageLookupByLibrary.simpleMessage("ブラックテーマ"),
+    "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("ダークテーマを使用するときは真っ黒の背景色を使用する"),
+    "settings_grid" : MessageLookupByLibrary.simpleMessage("グリッドの列数"),
+    "settings_grid_desc" : MessageLookupByLibrary.simpleMessage("プロジェクトページのグリッドの列数"),
+    "settings_looks" : MessageLookupByLibrary.simpleMessage("見た目"),
     "settings_scrapbox" : MessageLookupByLibrary.simpleMessage("Scrapbox"),
-    "settings_telomere" : MessageLookupByLibrary.simpleMessage("Telomere"),
-    "settings_telomere_desc" : MessageLookupByLibrary.simpleMessage("Show a telomere beside the paragraph"),
-    "settings_theme" : MessageLookupByLibrary.simpleMessage("Theme"),
-    "settings_theme_dark" : MessageLookupByLibrary.simpleMessage("Dark"),
-    "settings_theme_default" : MessageLookupByLibrary.simpleMessage("Follow system"),
-    "settings_theme_desc" : MessageLookupByLibrary.simpleMessage("ScrapMate\'s theme"),
-    "settings_theme_light" : MessageLookupByLibrary.simpleMessage("Light")
+    "settings_telomere" : MessageLookupByLibrary.simpleMessage("テロメア"),
+    "settings_telomere_desc" : MessageLookupByLibrary.simpleMessage("段落の横にテロメアを表示する"),
+    "settings_theme" : MessageLookupByLibrary.simpleMessage("テーマ"),
+    "settings_theme_dark" : MessageLookupByLibrary.simpleMessage("ダーク"),
+    "settings_theme_default" : MessageLookupByLibrary.simpleMessage("システムに従う"),
+    "settings_theme_desc" : MessageLookupByLibrary.simpleMessage("ScrapMate のテーマ"),
+    "settings_theme_light" : MessageLookupByLibrary.simpleMessage("ライト")
   };
 }
