@@ -1,0 +1,18 @@
+{
+    "@@locale": "ja",
+
+    "settings": "Settings",
+    "settings_looks": "Looks",
+    "settings_theme": "Theme",
+    "settings_theme_desc": "ScrapMate's theme",
+    "settings_theme_default": "Follow system",
+    "settings_theme_light": "Light",
+    "settings_theme_dark": "Dark",
+    "settings_black_theme": "Black theme",
+    "settings_black_theme_desc": "Use pure black background color when using dark theme",
+    "settings_scrapbox": "Scrapbox",
+    "settings_grid": "Number of grid columns",
+    "settings_grid_desc": "Number of grid columns in project page",
+    "settings_telomere": "Telomere",
+    "settings_telomere_desc": "Show a telomere beside the paragraph"
+}
