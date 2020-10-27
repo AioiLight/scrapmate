@@ -21,6 +21,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "add" : MessageLookupByLibrary.simpleMessage("Add"),
+    "add_project" : MessageLookupByLibrary.simpleMessage("Add project"),
+    "add_project_desc" : MessageLookupByLibrary.simpleMessage("Enter Scrapbox\'s project URL to add project"),
+    "add_project_placeholder" : MessageLookupByLibrary.simpleMessage("Project URL (e.g. help, shokai)"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
+    "delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "no" : MessageLookupByLibrary.simpleMessage("No"),
+    "ok" : MessageLookupByLibrary.simpleMessage("OK"),
+    "open_in_browser" : MessageLookupByLibrary.simpleMessage("Open in browser"),
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "settings_black_theme" : MessageLookupByLibrary.simpleMessage("Black theme"),
     "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("Use pure black background color when using dark theme"),
@@ -34,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings_theme_dark" : MessageLookupByLibrary.simpleMessage("Dark"),
     "settings_theme_default" : MessageLookupByLibrary.simpleMessage("Follow system"),
     "settings_theme_desc" : MessageLookupByLibrary.simpleMessage("ScrapMate\'s theme"),
-    "settings_theme_light" : MessageLookupByLibrary.simpleMessage("Light")
+    "settings_theme_light" : MessageLookupByLibrary.simpleMessage("Light"),
+    "share" : MessageLookupByLibrary.simpleMessage("Share"),
+    "yes" : MessageLookupByLibrary.simpleMessage("Yes")
   };
 }

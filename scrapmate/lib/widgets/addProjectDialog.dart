@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddProjectDialog {
   String url = "";
@@ -9,15 +10,16 @@ class AddProjectDialog {
 
   AlertDialog showDialog(BuildContext buildContext) {
     return AlertDialog(
-        title: Text("Add project"),
+        title: Text(AppLocalizations.of(buildContext).add_project),
         content: Column(
           children: [
-            const Text("Enter Scrapbox's project URL to add project"),
+            Text(AppLocalizations.of(buildContext).add_project_desc),
             const Text("https://scrapbox.io/"),
             TextField(
               maxLines: 1,
-              decoration: const InputDecoration(
-                  hintText: "Project URL (e.g. help, shokai)"),
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(buildContext)
+                      .add_project_placeholder),
               onChanged: _textChanged,
               autofocus: true,
             )
@@ -26,10 +28,10 @@ class AddProjectDialog {
         actions: [
           SimpleDialogOption(
               onPressed: () => Navigator.pop(buildContext, null),
-              child: Text("Cancel")),
+              child: Text(AppLocalizations.of(buildContext).cancel)),
           SimpleDialogOption(
               onPressed: () => Navigator.pop(buildContext, url),
-              child: Text("Add")),
+              child: Text(AppLocalizations.of(buildContext).add)),
         ]);
   }
 }

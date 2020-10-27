@@ -21,6 +21,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "add" : MessageLookupByLibrary.simpleMessage("追加"),
+    "add_project" : MessageLookupByLibrary.simpleMessage("プロジェクトの追加"),
+    "add_project_desc" : MessageLookupByLibrary.simpleMessage("Scrapbox のプロジェクト URL を入力してプロジェクトを追加"),
+    "add_project_placeholder" : MessageLookupByLibrary.simpleMessage("プロジェクト URL (例: help, shokai)"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("キャンセル"),
+    "delete" : MessageLookupByLibrary.simpleMessage("削除"),
+    "no" : MessageLookupByLibrary.simpleMessage("いいえ"),
+    "ok" : MessageLookupByLibrary.simpleMessage("OK"),
+    "open_in_browser" : MessageLookupByLibrary.simpleMessage("ブラウザで開く"),
     "settings" : MessageLookupByLibrary.simpleMessage("設定"),
     "settings_black_theme" : MessageLookupByLibrary.simpleMessage("ブラックテーマ"),
     "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("ダークテーマを使用するときは真っ黒の背景色を使用する"),
@@ -34,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings_theme_dark" : MessageLookupByLibrary.simpleMessage("ダーク"),
     "settings_theme_default" : MessageLookupByLibrary.simpleMessage("システムに従う"),
     "settings_theme_desc" : MessageLookupByLibrary.simpleMessage("ScrapMate のテーマ"),
-    "settings_theme_light" : MessageLookupByLibrary.simpleMessage("ライト")
+    "settings_theme_light" : MessageLookupByLibrary.simpleMessage("ライト"),
+    "share" : MessageLookupByLibrary.simpleMessage("共有"),
+    "yes" : MessageLookupByLibrary.simpleMessage("はい")
   };
 }

@@ -1,5 +1,21 @@
 {
     "@@locale": "ja",
+
+    "ok": "OK",
+    "cancel": "キャンセル",
+    "yes": "はい",
+    "no": "いいえ",
+
+    "add": "追加",
+    "delete": "削除",
+
+    "add_project": "プロジェクトの追加",
+    "add_project_desc": "Scrapbox のプロジェクト URL を入力してプロジェクトを追加",
+    "add_project_placeholder": "プロジェクト URL (例: help, shokai)",
+
+    "open_in_browser": "ブラウザで開く",
+    "share": "共有",
+
     "settings": "設定",
     "settings_looks": "見た目",
     "settings_theme": "テーマ",

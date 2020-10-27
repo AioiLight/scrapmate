@@ -1,6 +1,32 @@
 {
     "@@locale": "en",
 
+    "ok": "OK",
+    "@ok": {},
+    "cancel": "Cancel",
+    "@cancel": {},
+    "yes": "Yes",
+    "@yes": {},
+    "no": "No",
+    "@no": {},
+
+    "add": "Add",
+    "@add": {},
+    "delete": "Delete",
+    "@delete": {},
+
+    "add_project": "Add project",
+    "@add_project": {},
+    "add_project_desc": "Enter Scrapbox's project URL to add project",
+    "@add_project_desc": {},
+    "add_project_placeholder": "Project URL (e.g. help, shokai)",
+    "@add_project_placeholder": {},
+
+    "open_in_browser": "Open in browser",
+    "@open_in_browser": {},
+    "share": "Share",
+    "@share": {},
+
     "settings": "Settings",
     "@settings": {},
     "settings_looks": "Looks",

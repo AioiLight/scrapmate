@@ -5,6 +5,7 @@ import 'package:scrapmate/parser.dart';
 import 'package:scrapmate/util.dart';
 import 'package:share/share.dart';
 import 'scrap.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScrapView extends StatefulWidget {
   ScrapView({Key key}) : super(key: key);
@@ -64,13 +65,13 @@ class _ScrapViewState extends State<ScrapView>
               IconButton(
                 icon: Icon(Icons.share),
                 onPressed: () => {_openShare(args)},
-                tooltip: "Share",
+                tooltip: AppLocalizations.of(context).share,
               ),
               IconButton(
                 icon: Icon(Icons.open_in_browser),
                 onPressed: () => Util.openBrowser(
                     Scrap.getPageUrl(args.projectDir, args.pageTitle)),
-                tooltip: "Open in browser",
+                tooltip: AppLocalizations.of(context).open_in_browser,
               )
             ],
             leading: IconButton(

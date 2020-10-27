@@ -35,6 +35,116 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add project`
+  String get add_project {
+    return Intl.message(
+      'Add project',
+      name: 'add_project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Scrapbox's project URL to add project`
+  String get add_project_desc {
+    return Intl.message(
+      'Enter Scrapbox\'s project URL to add project',
+      name: 'add_project_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project URL (e.g. help, shokai)`
+  String get add_project_placeholder {
+    return Intl.message(
+      'Project URL (e.g. help, shokai)',
+      name: 'add_project_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open in browser`
+  String get open_in_browser {
+    return Intl.message(
+      'Open in browser',
+      name: 'open_in_browser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message(
