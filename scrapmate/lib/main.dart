@@ -162,11 +162,24 @@ class _MyHomePageState extends State<MyHomePage>
                       return null;
                     }
                     final item = _list[index];
-                    return Project(
-                      projectName: item?.projectName ?? "Unknown project",
-                      icon: item?.icon ?? null,
-                      path: item?.path ?? "-",
-                      key: Key(index.toString()),
+                    return Dismissible(
+                      key: Key(item.projectName),
+                      child: Project(
+                        projectName: item?.projectName ?? "Unknown project",
+                        icon: item?.icon ?? null,
+                        path: item?.path ?? "-",
+                        key: Key(index.toString()),
+                      ),
+                      onDismissed: (direction) {
+                        setState(() {
+                          _list.removeAt(index);
+                        });
+
+                        Util.setPrefProjects(_list);
+
+                        Fluttertoast.showToast(
+                            msg: "Removed ${item.projectName}");
+                      },
                     );
                   }))),
           physics: Const.ListScrollPhysics,
