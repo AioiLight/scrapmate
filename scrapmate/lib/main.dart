@@ -144,6 +144,7 @@ class _MyHomePageState extends State<MyHomePage>
         actions: [
           IconButton(
               icon: Icon(Icons.settings),
+              tooltip: AppLocalizations.of(context).settings,
               onPressed: () {
                 Navigator.pushNamed(context, "/setting");
               })
