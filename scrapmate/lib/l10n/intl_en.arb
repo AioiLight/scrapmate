@@ -2,59 +2,31 @@
     "@@locale": "en",
 
     "settings": "Settings",
-    "@settings": {
-        "description": ""
-    },
+    "@settings": {},
     "settings_looks": "Looks",
-    "@settings_looks": {
-        "description": ""
-    },
+    "@settings_looks": {},
     "settings_theme": "Theme",
-    "@settings_theme": {
-        "description": ""
-    },
+    "@settings_theme": {},
     "settings_theme_desc": "ScrapMate's theme",
-    "@settings_theme_desc": {
-        "description": ""
-    },
+    "@settings_theme_desc": {},
     "settings_theme_default": "Follow system",
-    "@settings_theme_default": {
-        "description": ""
-    },
+    "@settings_theme_default": {},
     "settings_theme_light": "Light",
-    "@settings_theme_light": {
-        "description": ""
-    },
+    "@settings_theme_light": {},
     "settings_theme_dark": "Dark",
-    "@settings_theme_dark": {
-        "description": ""
-    },
+    "@settings_theme_dark": {},
     "settings_black_theme": "Black theme",
-    "@settings_black_theme": {
-        "description": ""
-    },
+    "@settings_black_theme": {},
     "settings_black_theme_desc": "Use pure black background color when using dark theme",
-    "@settings_black_theme_desc": {
-        "description": ""
-    },
+    "@settings_black_theme_desc": {},
     "settings_scrapbox": "Scrapbox",
-    "@settings_scrapbox": {
-        "description": ""
-    },
+    "@settings_scrapbox": {},
     "settings_grid": "Number of grid columns",
-    "@settings_grid": {
-        "description": ""
-    },
+    "@settings_grid": {},
     "settings_grid_desc": "Number of grid columns in project page",
-    "@settings_grid_desc": {
-        "description": ""
-    },
+    "@settings_grid_desc": {},
     "settings_telomere": "Telomere",
-    "@settings_telomere": {
-        "description": ""
-    },
+    "@settings_telomere": {},
     "settings_telomere_desc": "Show a telomere beside the paragraph",
-    "@settings_telomere_desc": {
-        "description": ""
-    }
+    "@settings_telomere_desc": {}
 }
