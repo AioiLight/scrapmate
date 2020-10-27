@@ -1,0 +1,33 @@
+{
+    "@@locale": "ja",
+
+    "ok": "OK",
+    "cancel": "キャンセル",
+    "yes": "はい",
+    "no": "いいえ",
+
+    "add": "追加",
+    "delete": "削除",
+
+    "add_project": "プロジェクトの追加",
+    "add_project_desc": "Scrapbox のプロジェクト URL を入力してプロジェクトを追加",
+    "add_project_placeholder": "プロジェクト URL (例: help, shokai)",
+
+    "open_in_browser": "ブラウザで開く",
+    "share": "共有",
+
+    "settings": "設定",
+    "settings_looks": "見た目",
+    "settings_theme": "テーマ",
+    "settings_theme_desc": "ScrapMate のテーマ",
+    "settings_theme_default": "システムに従う",
+    "settings_theme_light": "ライト",
+    "settings_theme_dark": "ダーク",
+    "settings_black_theme": "ブラックテーマ",
+    "settings_black_theme_desc": "ダークテーマを使用するときは真っ黒の背景色を使用する",
+    "settings_scrapbox": "Scrapbox",
+    "settings_grid": "グリッドの列数",
+    "settings_grid_desc": "プロジェクトページのグリッドの列数",
+    "settings_telomere": "テロメア",
+    "settings_telomere_desc": "段落の横にテロメアを表示する"
+}

@@ -10,6 +10,7 @@ import 'package:scrapmate/util.dart';
 import 'package:scrapmate/view.dart';
 import 'package:scrapmate/widgets/addProjectDialog.dart';
 import 'package:scrapmate/widgets/project.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,8 @@ class MyApp extends StatelessWidget {
         "/view": (BuildContext context) => ScrapView(),
         "/setting": (BuildContext context) => SettingsGeneral(),
       },
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
