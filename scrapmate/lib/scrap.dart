@@ -71,12 +71,20 @@ class Scrap {
     return icon['image'];
   }
 
-  static Future<List<ScrapboxPageListResultPage>> getPages(
+  static Future<ScrapboxPageListResult> getProject(
       Future<Map<String, dynamic>> json) async {
     final j = await json;
     final result = ScrapboxPageListResult.fromJson(j);
 
-    return result.pages;
+    return result;
+  }
+
+  static Future<List<ScrapboxPageListResultPage>> getPages(
+      Future<Map<String, dynamic>> json) async {
+    final j = await json;
+    final project = await getProject(json);
+
+    return project.pages;
   }
 
   static Future<ScrapboxPageResult> getPage(

@@ -20,6 +20,7 @@ class _ProjectPageState extends State<ProjectPage>
   Future<List<ScrapboxPageListResultPage>> _items;
   List<ScrapboxPageListResultPage> _itemsResult;
   bool _loading = false;
+  bool _allLoaded = false;
 
   void _loaded(List<ScrapboxPageListResultPage> result) {
     setState(() {
@@ -34,8 +35,15 @@ class _ProjectPageState extends State<ProjectPage>
 
     _loading = true;
 
-    final newPages = await Scrap.getPages(
-        Scrap.getJsonUserTop(args.dir, skip: _itemsResult.length));
+    final json = Scrap.getJsonUserTop(args.dir, skip: _itemsResult.length);
+
+    final newPageResult = await Scrap.getProject(json);
+    final newPages = await Scrap.getPages(json);
+
+    if (_itemsResult.length >= newPageResult.count) {
+      // 読み込みが全て終わった
+      _allLoaded = true;
+    }
 
     setState(() {
       _itemsResult.addAll(newPages);
@@ -92,34 +100,40 @@ class _ProjectPageState extends State<ProjectPage>
       body: Container(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: GridView.builder(
-          physics: Const.ListScrollPhysics,
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: PrefService.getInt("grid")),
-          itemBuilder: (BuildContext context, int index) {
-            if (_itemsResult == null) {
-              return null;
-            }
+        child: _itemsResult != null
+            ? GridView.builder(
+                physics: Const.ListScrollPhysics,
+                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: PrefService.getInt("grid")),
+                itemBuilder: (BuildContext context, int index) {
+                  if (_itemsResult == null) {
+                    return null;
+                  }
 
-            if (index == _itemsResult.length) {
-              _loadmore(args);
-              return const CircularProgressIndicator();
-            }
+                  if (index == _itemsResult.length) {
+                    if (!_allLoaded) {
+                      _loadmore(args);
+                      return const CircularProgressIndicator();
+                    } else {
+                      return null;
+                    }
+                  }
 
-            if (index > _itemsResult.length) {
-              return null;
-            }
+                  if (index > _itemsResult.length) {
+                    return null;
+                  }
 
-            final item = _itemsResult[index];
-            return ScrapPage(
-              id: item.id,
-              title: item.title,
-              lead: item.descriptions.join("\n"),
-              thumbnail: item.image,
-              projectUrl: args.dir,
-            );
-          },
-        ),
+                  final item = _itemsResult[index];
+                  return ScrapPage(
+                    id: item.id,
+                    title: item.title,
+                    lead: item.descriptions.join("\n"),
+                    thumbnail: item.image,
+                    projectUrl: args.dir,
+                  );
+                },
+              )
+            : Center(child: CircularProgressIndicator()),
       ),
     );
   }
