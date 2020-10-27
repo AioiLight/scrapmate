@@ -81,7 +81,6 @@ class Scrap {
 
   static Future<List<ScrapboxPageListResultPage>> getPages(
       Future<Map<String, dynamic>> json) async {
-    final j = await json;
     final project = await getProject(json);
 
     return project.pages;
