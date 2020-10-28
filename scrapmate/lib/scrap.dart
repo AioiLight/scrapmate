@@ -49,13 +49,13 @@ class Scrap {
   static Future<Map<String, dynamic>> getJsonProject(String projectPath) async {
     final url = "/api/projects/$projectPath";
 
-    final response = await fetch(url);
+    try {
+      final response = await fetch(url);
 
-    if (response.statusCode == 200) {
       final Map<String, dynamic> j = json.decode(response.body);
       return j;
-    } else {
-      throw Exception("Unable to get infomations.");
+    } catch (e) {
+      throw Exception("Unable to connect Scrabox.");
     }
   }
 
@@ -90,6 +90,14 @@ class Scrap {
       Future<Map<String, dynamic>> json) async {
     final j = await json;
     final result = ScrapboxPageResult.fromJson(j);
+
+    return result;
+  }
+
+  static Future<ScrapboxError> getError(
+      Future<Map<String, dynamic>> json) async {
+    final j = await json;
+    final result = ScrapboxError.fromJson(j);
 
     return result;
   }
@@ -231,5 +239,20 @@ class ScrapboxPageResultLines {
         userId: json['userId'],
         created: json['created'],
         updated: json['updated']);
+  }
+}
+
+class ScrapboxError {
+  ScrapboxError({this.name, this.message, this.statusCode});
+
+  final String name;
+  final String message;
+  final int statusCode;
+
+  factory ScrapboxError.fromJson(Map<String, dynamic> json) {
+    return ScrapboxError(
+        name: json['name'],
+        message: json['message'],
+        statusCode: json['statusCode']);
   }
 }

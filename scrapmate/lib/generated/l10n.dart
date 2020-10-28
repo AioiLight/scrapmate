@@ -155,11 +155,51 @@ class S {
     );
   }
 
+  /// `Unable to open browser`
+  String get open_in_browser_failed {
+    return Intl.message(
+      'Unable to open browser',
+      name: 'open_in_browser_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Share`
   String get share {
     return Intl.message(
       'Share',
       name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to connect Scrabox. Check your network connection.`
+  String get scrap_network_error {
+    return Intl.message(
+      'Unable to connect Scrabox. Check your network connection.',
+      name: 'scrap_network_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scrapbox project not found`
+  String get scrap_404 {
+    return Intl.message(
+      'Scrapbox project not found',
+      name: 'scrap_404',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to access Scrapbox project because you are not a member`
+  String get scrap_403 {
+    return Intl.message(
+      'Unable to access Scrapbox project because you are not a member',
+      name: 'scrap_403',
       desc: '',
       args: [],
     );

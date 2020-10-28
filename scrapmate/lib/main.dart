@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/projectPage.dart';
@@ -117,24 +116,46 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _addProject(String projectURL) async {
-    final projectJson = Scrap.getJsonProject(projectURL);
-    final screenName = await Scrap.getProjectName(projectJson);
-    final icon = await Scrap.getProjectIcon(projectJson);
-    final url = projectURL;
+    try {
+      final projectJson = Scrap.getJsonProject(projectURL);
+      final screenName = await Scrap.getProjectName(projectJson);
 
-    final item =
-        ScrapboxProjectPref(projectName: screenName, icon: icon, path: url);
+      if (screenName == null) {
+        // エラー
+        final error = await Scrap.getError(projectJson);
 
-    final pref = await Util.getPrefProjects();
-    pref.add(item);
+        if (error.statusCode == 404) {
+          // 見つからない
+          Util.showToast(AppLocalizations.of(context).scrap_404);
+        } else if (error.statusCode == 403 || error.statusCode == 401) {
+          // プライベート
+          Util.showToast(AppLocalizations.of(context).scrap_403);
+        } else {
+          Util.showToast(AppLocalizations.of(context).scrap_network_error);
+        }
 
-    setState(() {
-      _list = pref;
-    });
+        return;
+      }
+      final icon = await Scrap.getProjectIcon(projectJson);
+      final url = projectURL;
 
-    Util.setPrefProjects(pref);
-    Fluttertoast.showToast(
-        msg: AppLocalizations.of(context).project_added(item.projectName));
+      final item =
+          ScrapboxProjectPref(projectName: screenName, icon: icon, path: url);
+
+      final pref = await Util.getPrefProjects();
+      pref.add(item);
+
+      setState(() {
+        _list = pref;
+      });
+
+      Util.setPrefProjects(pref);
+
+      Util.showToast(
+          AppLocalizations.of(context).project_added(item.projectName));
+    } catch (e) {
+      Util.showToast(AppLocalizations.of(context).scrap_network_error);
+    }
   }
 
   @override
@@ -178,9 +199,8 @@ class _MyHomePageState extends State<MyHomePage>
 
                         Util.setPrefProjects(_list);
 
-                        Fluttertoast.showToast(
-                            msg: AppLocalizations.of(context)
-                                .project_removed(item.projectName));
+                        Util.showToast(AppLocalizations.of(context)
+                            .project_removed(item.projectName));
                       },
                     );
                   }))),

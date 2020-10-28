@@ -93,7 +93,8 @@ class _ProjectPageState extends State<ProjectPage>
           ),
           IconButton(
             icon: Icon(Icons.open_in_browser),
-            onPressed: () => Util.openBrowser(Scrap.getProjectUrl(args.dir)),
+            onPressed: () =>
+                Util.openBrowser(Scrap.getProjectUrl(args.dir), context),
             tooltip: AppLocalizations.of(context).open_in_browser,
           )
         ],

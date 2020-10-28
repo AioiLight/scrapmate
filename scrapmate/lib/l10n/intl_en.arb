@@ -38,9 +38,18 @@
 
     "open_in_browser": "Open in browser",
     "@open_in_browser": {},
+    "open_in_browser_failed": "Unable to open browser",
+    "@open_in_browser_failed": {},
     "share": "Share",
     "@share": {},
 
+    "scrap_network_error": "Unable to connect Scrabox. Check your network connection.",
+    "@scrap_network_error": {},
+    "scrap_404": "Scrapbox project not found",
+    "@scrap_404": {},
+    "scrap_403": "Unable to access Scrapbox project because you are not a member",
+    "@scrap_403": {},
+    
     "settings": "Settings",
     "@settings": {},
     "settings_looks": "Looks",

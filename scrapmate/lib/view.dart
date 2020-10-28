@@ -70,7 +70,7 @@ class _ScrapViewState extends State<ScrapView>
               IconButton(
                 icon: Icon(Icons.open_in_browser),
                 onPressed: () => Util.openBrowser(
-                    Scrap.getPageUrl(args.projectDir, args.pageTitle)),
+                    Scrap.getPageUrl(args.projectDir, args.pageTitle), context),
                 tooltip: AppLocalizations.of(context).open_in_browser,
               )
             ],

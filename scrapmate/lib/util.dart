@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scrapmate/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'scrap.dart';
 
@@ -30,11 +31,15 @@ class Util {
     return SharedPreferences.getInstance();
   }
 
-  static void openBrowser(String url) async {
+  static void showToast(String mes) async {
+    Fluttertoast.showToast(msg: mes);
+  }
+
+  static void openBrowser(String url, BuildContext context) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      Fluttertoast.showToast(msg: "Unable to open browser");
+      showToast(AppLocalizations.of(context).open_in_browser_failed);
     }
   }
 

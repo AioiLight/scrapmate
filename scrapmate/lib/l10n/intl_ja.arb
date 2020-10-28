@@ -17,7 +17,12 @@
     "project_removed": "{projectName} を削除しました",
 
     "open_in_browser": "ブラウザで開く",
+    "open_in_browser_failed": "ブラウザを開けません",
     "share": "共有",
+
+    "scrap_network_error": "Scrapbox に接続できません。インターネットに接続されていることを確認してください。",
+    "scrap_404": "Scrapbox プロジェクトが見つかりませんでした",
+    "scrap_403": "メンバーではないため Scrapbox プロジェクトにアクセスできません",
 
     "settings": "設定",
     "settings_looks": "見た目",
