@@ -22,6 +22,20 @@
     "add_project_placeholder": "Project URL (e.g. help, shokai)",
     "@add_project_placeholder": {},
 
+    "project_added": "Added {projectName}",
+    "@project_added": {
+        "placeholders": {
+            "projectName": {}
+        }
+    },
+
+    "project_removed": "Removed {projectName}",
+    "@project_removed": {
+        "placeholders": {
+            "projectName": {}
+        }
+    },
+
     "open_in_browser": "Open in browser",
     "@open_in_browser": {},
     "share": "Share",

@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
+  static m0(projectName) => "${projectName} を追加しました";
+
+  static m1(projectName) => "${projectName} を削除しました";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "add" : MessageLookupByLibrary.simpleMessage("追加"),
@@ -30,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "no" : MessageLookupByLibrary.simpleMessage("いいえ"),
     "ok" : MessageLookupByLibrary.simpleMessage("OK"),
     "open_in_browser" : MessageLookupByLibrary.simpleMessage("ブラウザで開く"),
+    "project_added" : m0,
+    "project_removed" : m1,
     "settings" : MessageLookupByLibrary.simpleMessage("設定"),
     "settings_black_theme" : MessageLookupByLibrary.simpleMessage("ブラックテーマ"),
     "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("ダークテーマを使用するときは真っ黒の背景色を使用する"),

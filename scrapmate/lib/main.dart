@@ -133,7 +133,8 @@ class _MyHomePageState extends State<MyHomePage>
     });
 
     Util.setPrefProjects(pref);
-    Fluttertoast.showToast(msg: "Added ${item.projectName}");
+    Fluttertoast.showToast(
+        msg: AppLocalizations.of(context).project_added(item.projectName));
   }
 
   @override
@@ -178,7 +179,8 @@ class _MyHomePageState extends State<MyHomePage>
                         Util.setPrefProjects(_list);
 
                         Fluttertoast.showToast(
-                            msg: "Removed ${item.projectName}");
+                            msg: AppLocalizations.of(context)
+                                .project_removed(item.projectName));
                       },
                     );
                   }))),
@@ -187,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage>
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: _pushedAddProject,
-        tooltip: 'Add project',
+        tooltip: AppLocalizations.of(context).add_project,
         child: Icon(Icons.add),
       ),
     );

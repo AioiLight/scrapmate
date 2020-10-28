@@ -125,6 +125,26 @@ class S {
     );
   }
 
+  /// `Added {projectName}`
+  String project_added(Object projectName) {
+    return Intl.message(
+      'Added $projectName',
+      name: 'project_added',
+      desc: '',
+      args: [projectName],
+    );
+  }
+
+  /// `Removed {projectName}`
+  String project_removed(Object projectName) {
+    return Intl.message(
+      'Removed $projectName',
+      name: 'project_removed',
+      desc: '',
+      args: [projectName],
+    );
+  }
+
   /// `Open in browser`
   String get open_in_browser {
     return Intl.message(

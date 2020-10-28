@@ -13,6 +13,9 @@
     "add_project_desc": "Scrapbox のプロジェクト URL を入力してプロジェクトを追加",
     "add_project_placeholder": "プロジェクト URL (例: help, shokai)",
 
+    "project_added": "{projectName} を追加しました",
+    "project_removed": "{projectName} を削除しました",
+
     "open_in_browser": "ブラウザで開く",
     "share": "共有",
 
