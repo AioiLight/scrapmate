@@ -22,9 +22,11 @@ class _ScrapViewState extends State<ScrapView>
   ScrapboxPageResult _result;
 
   void _loaded(ScrapboxPageResult result) {
-    setState(() {
-      _result = result;
-    });
+    if (mounted) {
+      setState(() {
+        _result = result;
+      });
+    }
   }
 
   void _openShare(ScrapViewArgs args) {

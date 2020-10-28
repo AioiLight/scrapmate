@@ -24,9 +24,11 @@ class _ProjectPageState extends State<ProjectPage>
   bool _allLoaded = false;
 
   void _loaded(List<ScrapboxPageListResultPage> result) {
-    setState(() {
-      _itemsResult = result;
-    });
+    if (mounted) {
+      setState(() {
+        _itemsResult = result;
+      });
+    }
   }
 
   Future<void> _loadmore(ProjectPageArgs args) async {
@@ -46,9 +48,11 @@ class _ProjectPageState extends State<ProjectPage>
       _allLoaded = true;
     }
 
-    setState(() {
-      _itemsResult.addAll(newPages);
-    });
+    if (mounted) {
+      setState(() {
+        _itemsResult.addAll(newPages);
+      });
+    }
 
     _loading = false;
   }

@@ -70,15 +70,17 @@ class _MyHomePageState extends State<MyHomePage>
   var _list = List<ScrapboxProjectPref>();
 
   void _onReorder(int oldIndex, int newIndex) {
-    setState(
-      () {
-        if (newIndex > oldIndex) {
-          newIndex -= 1;
-        }
-        final item = _list.removeAt(oldIndex);
-        _list.insert(newIndex, item);
-      },
-    );
+    if (mounted) {
+      setState(
+        () {
+          if (newIndex > oldIndex) {
+            newIndex -= 1;
+          }
+          final item = _list.removeAt(oldIndex);
+          _list.insert(newIndex, item);
+        },
+      );
+    }
 
     Util.setPrefProjects(_list);
   }
@@ -97,9 +99,11 @@ class _MyHomePageState extends State<MyHomePage>
 
   void _loadProject() async {
     final pref = await Util.getPrefProjects();
-    setState(() {
-      _list = pref;
-    });
+    if (mounted) {
+      setState(() {
+        _list = pref;
+      });
+    }
   }
 
   @override
@@ -145,9 +149,11 @@ class _MyHomePageState extends State<MyHomePage>
       final pref = await Util.getPrefProjects();
       pref.add(item);
 
-      setState(() {
-        _list = pref;
-      });
+      if (mounted) {
+        setState(() {
+          _list = pref;
+        });
+      }
 
       Util.setPrefProjects(pref);
 
@@ -193,9 +199,11 @@ class _MyHomePageState extends State<MyHomePage>
                         key: Key(index.toString()),
                       ),
                       onDismissed: (direction) {
-                        setState(() {
-                          _list.removeAt(index);
-                        });
+                        if (mounted) {
+                          setState(() {
+                            _list.removeAt(index);
+                          });
+                        }
 
                         Util.setPrefProjects(_list);
 
