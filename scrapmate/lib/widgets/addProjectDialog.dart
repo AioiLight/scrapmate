@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddProjectDialog {
@@ -14,14 +15,24 @@ class AddProjectDialog {
         content: Column(
           children: [
             Text(AppLocalizations.of(buildContext).add_project_desc),
-            const Text("https://scrapbox.io/"),
-            TextField(
-              maxLines: 1,
-              decoration: InputDecoration(
-                  hintText: AppLocalizations.of(buildContext)
-                      .add_project_placeholder),
-              onChanged: _textChanged,
-              autofocus: true,
+            Row(
+              children: [
+                const Text("scrapbox.io/"),
+                Flexible(
+                  child: TextField(
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                        hintText: AppLocalizations.of(buildContext)
+                            .add_project_placeholder),
+                    onChanged: _textChanged,
+                    autofocus: true,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r"[:/]"))
+                    ],
+                  ),
+                ),
+                const Text("/"),
+              ],
             )
           ],
         ),

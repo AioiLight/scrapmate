@@ -19,7 +19,7 @@
     "@add_project": {},
     "add_project_desc": "Enter Scrapbox's project URL to add project",
     "@add_project_desc": {},
-    "add_project_placeholder": "Project URL (e.g. help, shokai)",
+    "add_project_placeholder": "(e.g. help, shokai)",
     "@add_project_placeholder": {},
 
     "project_added": "Added {projectName}",

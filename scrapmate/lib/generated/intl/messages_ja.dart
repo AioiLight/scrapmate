@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "add" : MessageLookupByLibrary.simpleMessage("追加"),
     "add_project" : MessageLookupByLibrary.simpleMessage("プロジェクトの追加"),
     "add_project_desc" : MessageLookupByLibrary.simpleMessage("Scrapbox のプロジェクト URL を入力してプロジェクトを追加"),
-    "add_project_placeholder" : MessageLookupByLibrary.simpleMessage("プロジェクト URL (例: help, shokai)"),
+    "add_project_placeholder" : MessageLookupByLibrary.simpleMessage("(例: help, shokai)"),
     "cancel" : MessageLookupByLibrary.simpleMessage("キャンセル"),
     "delete" : MessageLookupByLibrary.simpleMessage("削除"),
     "no" : MessageLookupByLibrary.simpleMessage("いいえ"),

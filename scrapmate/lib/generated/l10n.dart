@@ -115,10 +115,10 @@ class S {
     );
   }
 
-  /// `Project URL (e.g. help, shokai)`
+  /// `(e.g. help, shokai)`
   String get add_project_placeholder {
     return Intl.message(
-      'Project URL (e.g. help, shokai)',
+      '(e.g. help, shokai)',
       name: 'add_project_placeholder',
       desc: '',
       args: [],
