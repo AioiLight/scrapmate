@@ -64,7 +64,7 @@ class Parser {
     final remain = list.lines.skip(startIndex + 1).toList();
 
     for (var i = 1; i < remain.length; i++) {
-      if (_getIndent(remain[i].text) == indent) {
+      if (_getIndent(remain[i].text) <= indent) {
         // 同じインデントの高さにぶち当たるまで
         return remain.take(i).toList();
       }
