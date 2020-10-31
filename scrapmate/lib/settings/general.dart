@@ -108,7 +108,7 @@ class _SettingsGeneralState extends State<SettingsGeneral>
                   context: context,
                   applicationVersion: _version,
                   children: [
-                    Flexible(child: Text("Powered by Flutter and Love <3")),
+                    Text("Powered by Flutter and Love <3"),
                     RaisedButton(
                       child: Text("GitHub"),
                       onPressed: () => Util.openBrowser(
@@ -117,7 +117,7 @@ class _SettingsGeneralState extends State<SettingsGeneral>
                     RaisedButton(
                         child: Text("Twitter (@aioilight)"),
                         onPressed: () => Util.openBrowser(
-                            "https://twitter.com/aioilight/", context)),
+                            "https://twitter.com/aioilight/", context))
                   ],
                   applicationIcon: Container(
                     child: Image.asset(

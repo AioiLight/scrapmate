@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/parser.dart';
-import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/util.dart';
 import 'package:share/share.dart';
 import 'scrap.dart';

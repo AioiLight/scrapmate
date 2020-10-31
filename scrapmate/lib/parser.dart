@@ -53,18 +53,22 @@ class Parser {
 
       final lineWidget = l.generate();
 
-      result.add(Stack(
+      result.add(Column(
         children: [
-          if (PrefService.getBool("telomere"))
-            Positioned(child: Telomere(l.info.updated), top: 0, bottom: 0),
-          Row(
+          Stack(
             children: [
-              Container(
-                width: 24 + 1.0 * indent * 8,
-              ),
-              await lineWidget
+              if (PrefService.getBool("telomere"))
+                Positioned(child: Telomere(l.info.updated), top: 0, bottom: 0),
+              Row(
+                children: [
+                  Container(
+                    width: 24 + 1.0 * indent * 8,
+                  ),
+                  Expanded(child: await lineWidget)
+                ],
+              )
             ],
-          )
+          ),
         ],
       ));
     }
@@ -332,12 +336,11 @@ class ScrapText extends ScrapLine {
   }
 
   Future<Widget> generate() async {
-    return Flexible(
-        child: RichText(
-            text: TextSpan(
+    return RichText(
+        text: TextSpan(
       children: await _getSpan(text),
       style: TextStyle(height: 1.8),
-    )));
+    ));
   }
 }
 
@@ -352,8 +355,7 @@ class ScrapCode extends ScrapLine {
 
   Future<Widget> generate() async {
     final md = "```$lang\n" + codes.join("\n") + "\n```";
-    return Flexible(
-        child: Column(children: [
+    return Column(children: [
       Row(
         children: [
           Icon(Icons.code),
@@ -365,7 +367,7 @@ class ScrapCode extends ScrapLine {
         selectable: true,
         fitContent: false,
       )
-    ]));
+    ]);
   }
 }
 
@@ -394,11 +396,10 @@ class ScrapTable extends ScrapLine {
   }
 
   Future<Widget> generate() async {
-    return Flexible(
-        child: Column(children: [
+    return Column(children: [
       Row(children: [Icon(Icons.table_view), Text(title ?? "")]),
       _getTable(rows)
-    ]));
+    ]);
   }
 
   final List<String> rows;
@@ -412,23 +413,20 @@ class ScraoQuote extends ScrapLine {
       : super(level, info, context, projectDir);
 
   Future<Widget> generate() async {
-    return Expanded(
-      child: Container(
-        child: Stack(
-          children: [
-            await ScrapText(level, info, context, projectDir,
-                    text: content.substring(1))
-                .generate(),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Icon(Icons.format_quote),
-            )
-          ],
-        ),
-        color: Theme.of(context).primaryColor,
+    return Container(
+      child: Stack(
+        children: [
+          await ScrapText(level, info, context, projectDir,
+                  text: content.substring(1))
+              .generate(),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: Icon(Icons.format_quote),
+          )
+        ],
       ),
-      flex: 1,
+      color: Theme.of(context).primaryColor,
     );
   }
 
