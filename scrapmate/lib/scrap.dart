@@ -110,6 +110,7 @@ class Scrap {
   static final link = RegExp(r"\[([^*/-]+?)(.+?)\]");
   static final titledLink = RegExp(r"(.+) (.+)");
   static final url = RegExp(r"https?://[\w/:%#\$&\?\(\)~\.=\+\-]+");
+  static final inlineCode = RegExp(r"`(.*?)`");
   static final scrapboxProject = RegExp(r"^https?://scrapbox.io/(.+)/?$");
   static final scrapboxPage = RegExp(r"^https?://scrapbox.io/(.+)/(.+)/?$");
 }

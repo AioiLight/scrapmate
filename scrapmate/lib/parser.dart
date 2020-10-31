@@ -6,6 +6,7 @@ import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/telomere.dart';
+import 'package:syntax_highlighter/syntax_highlighter.dart';
 import 'scrap.dart';
 
 class Parser {
@@ -111,14 +112,18 @@ class ScrapText extends ScrapLine {
       final deco = Scrap.decoration.firstMatch(str);
       final bracketLink = Scrap.link.firstMatch(str);
       final plainLink = Scrap.url.firstMatch(str);
+      final inlineCode = Scrap.inlineCode.firstMatch(str);
 
-      if (deco == null && bracketLink == null && plainLink == null) {
+      if (deco == null &&
+          bracketLink == null &&
+          plainLink == null &&
+          inlineCode == null) {
         list.add(TextSpan(text: str, style: style));
         str = "";
         continue;
       }
 
-      final matches = {deco, bracketLink, plainLink};
+      final matches = {deco, bracketLink, plainLink, inlineCode};
       final sorted = matches.where((element) => element != null).toList();
       sorted.sort((a, b) => a.start.compareTo(b.start));
 
@@ -196,6 +201,19 @@ class ScrapText extends ScrapLine {
               style: linkStyle,
               recognizer: TapGestureRecognizer()
                 ..onTap = () => Util.openBrowser(url, context)));
+        } else if (first == inlineCode) {
+          // インラインコード
+          final code = inlineCode.group(1);
+          final SyntaxHighlighterStyle style =
+              Theme.of(context).brightness == Brightness.dark
+                  ? SyntaxHighlighterStyle.darkThemeStyle()
+                  : SyntaxHighlighterStyle.lightThemeStyle();
+          list.add(TextSpan(
+            style: const TextStyle(),
+            children: <TextSpan>[
+              DartSyntaxHighlighter(style).format(code),
+            ],
+          ));
         }
         str = str.substring(first.end);
       }
