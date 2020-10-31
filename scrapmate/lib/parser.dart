@@ -98,6 +98,8 @@ class ScrapText extends ScrapLine {
       : super(level, info, context, projectDir);
 
   final String text;
+  final linkStyle = TextStyle(
+      color: Colors.accents.first, decoration: TextDecoration.underline);
 
   List<TextSpan> _getSpan(String str, {TextStyle style}) {
     final list = List<TextSpan>();
@@ -107,15 +109,16 @@ class ScrapText extends ScrapLine {
     while (str.length > 0) {
       // 正規表現でパターンマッチングして、最短位置の前までを抽出
       final deco = Scrap.decoration.firstMatch(str);
-      final link = Scrap.link.firstMatch(str);
+      final bracketLink = Scrap.link.firstMatch(str);
+      final plainLink = Scrap.url.firstMatch(str);
 
-      if (deco == null && link == null) {
+      if (deco == null && bracketLink == null && plainLink == null) {
         list.add(TextSpan(text: str, style: style));
         str = "";
         continue;
       }
 
-      final matches = {deco, link};
+      final matches = {deco, bracketLink, plainLink};
       final sorted = matches.where((element) => element != null).toList();
       sorted.sort((a, b) => a.start.compareTo(b.start));
 
@@ -131,22 +134,17 @@ class ScrapText extends ScrapLine {
           // 装飾
           final style = _getParseText(_getDecorations(deco.namedGroup("type")));
 
-          print(deco.namedGroup("type"));
-          print(deco.namedGroup("content"));
-
           list.add(TextSpan(
               children: _getSpan(deco.namedGroup("content"), style: style)));
-        } else if (first == link) {
+        } else if (first == bracketLink) {
           // リンク
-          final content = link.group(1) + link.group(2);
+          final content = bracketLink.group(1) + bracketLink.group(2);
           final url = Scrap.url.firstMatch(content);
           final titled = Scrap.titledLink.firstMatch(content);
 
           TextSpan span;
 
-          final style = TextStyle(
-              color: Colors.accents.first,
-              decoration: TextDecoration.underline);
+          final style = linkStyle;
 
           if (titled != null) {
             final before = Scrap.url.hasMatch(titled.group(1));
@@ -190,6 +188,14 @@ class ScrapText extends ScrapLine {
           if (span != null) {
             list.add(span);
           }
+        } else if (first == plainLink) {
+          // プレーンなリンク
+          final url = str.substring(first.start, first.end);
+          list.add(TextSpan(
+              text: url,
+              style: linkStyle,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => Util.openBrowser(url, context)));
         }
         str = str.substring(first.end);
       }
