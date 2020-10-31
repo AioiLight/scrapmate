@@ -33,6 +33,14 @@ class Parser {
         l = ScrapCode(indent, line, context, projectDir,
             lang: codes.first.text.substring("code:".length),
             codes: codes.skip(1).map((e) => e.text).toList());
+      } else if (text.trimLeft().startsWith("table:")) {
+        // テーブル
+        final table = _getUtilUnIndent(scrap, i, indent);
+        i += table.length - 1;
+
+        l = ScrapTable(indent, line, context, projectDir,
+            rows: table.skip(1).map((e) => e.text.trim()).toList(),
+            title: table.first.text.substring("table:".length));
       } else {
         // ただの段落。
         l = ScrapText(indent, line, context, projectDir, text: text);
@@ -303,6 +311,42 @@ class ScrapCode extends ScrapLine {
     final md = "```$lang\n" + codes.join("\n") + "\n```";
     return Flexible(child: MarkdownBody(data: md, selectable: true));
   }
+}
+
+class ScrapTable extends ScrapLine {
+  ScrapTable(int level, ScrapboxPageResultLines info, BuildContext context,
+      String projectDir,
+      {this.rows, this.title})
+      : super(level, info, context, projectDir);
+
+  TableRow _getRow(
+    String row,
+  ) {
+    final list = List<Text>();
+
+    row.split("\t").forEach((element) {
+      list.add(Text(element));
+    });
+
+    return TableRow(
+        children: list,
+        decoration: BoxDecoration(color: Theme.of(context).primaryColor));
+  }
+
+  Table _getTable(List<String> rows) {
+    return Table(children: rows.map((e) => _getRow(e)).toList());
+  }
+
+  Widget generate() {
+    return Flexible(
+        child: Column(children: [
+      Row(children: [Icon(Icons.table_view), Text(title ?? "")]),
+      _getTable(rows)
+    ]));
+  }
+
+  final List<String> rows;
+  final String title;
 }
 
 class Decorations {
