@@ -95,6 +95,7 @@ class _ScrapViewState extends State<ScrapView>
                       if (snapshot.hasData) {
                         return ListView(
                           children: snapshot.data,
+                          padding: EdgeInsets.only(right: 24),
                         );
                       } else {
                         return Center(
