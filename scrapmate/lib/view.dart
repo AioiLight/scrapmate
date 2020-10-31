@@ -116,7 +116,14 @@ class _ScrapViewState extends State<ScrapView>
                           children: snapshot.data,
                         );
                       } else {
-                        return Center(child: CircularProgressIndicator());
+                        return Center(
+                            child: Column(
+                          children: [
+                            CircularProgressIndicator(),
+                            Flexible(child: Text("Loading..."))
+                          ],
+                          mainAxisSize: MainAxisSize.min,
+                        ));
                       }
                     },
                   )
