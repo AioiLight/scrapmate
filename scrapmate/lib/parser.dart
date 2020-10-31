@@ -58,7 +58,7 @@ class Parser {
           Row(
             children: [
               Container(
-                width: 16 + 1.0 * indent * 8,
+                width: 24 + 1.0 * indent * 8,
               ),
               lineWidget
             ],
