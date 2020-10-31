@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings_loading_images_wifi" : MessageLookupByLibrary.simpleMessage("Wi-Fi 接続時のみ"),
     "settings_looks" : MessageLookupByLibrary.simpleMessage("見た目"),
     "settings_scrapbox" : MessageLookupByLibrary.simpleMessage("Scrapbox"),
+    "settings_scrapmate" : MessageLookupByLibrary.simpleMessage("ScrapMate"),
+    "settings_scrapmate_about" : MessageLookupByLibrary.simpleMessage("ScrapMate について"),
     "settings_telomere" : MessageLookupByLibrary.simpleMessage("テロメア"),
     "settings_telomere_desc" : MessageLookupByLibrary.simpleMessage("段落の横にテロメアを表示する"),
     "settings_theme" : MessageLookupByLibrary.simpleMessage("テーマ"),

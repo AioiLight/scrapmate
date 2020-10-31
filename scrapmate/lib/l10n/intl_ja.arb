@@ -44,5 +44,7 @@
     "settings_grid": "グリッドの列数",
     "settings_grid_desc": "プロジェクトページのグリッドの列数",
     "settings_telomere": "テロメア",
-    "settings_telomere_desc": "段落の横にテロメアを表示する"
+    "settings_telomere_desc": "段落の横にテロメアを表示する",
+    "settings_scrapmate": "ScrapMate",
+    "settings_scrapmate_about": "ScrapMate について"
 }

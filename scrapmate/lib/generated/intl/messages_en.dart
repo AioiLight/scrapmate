@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings_loading_images_wifi" : MessageLookupByLibrary.simpleMessage("Wi-Fi only"),
     "settings_looks" : MessageLookupByLibrary.simpleMessage("Looks"),
     "settings_scrapbox" : MessageLookupByLibrary.simpleMessage("Scrapbox"),
+    "settings_scrapmate" : MessageLookupByLibrary.simpleMessage("ScrapMate"),
+    "settings_scrapmate_about" : MessageLookupByLibrary.simpleMessage("About ScrapMate"),
     "settings_telomere" : MessageLookupByLibrary.simpleMessage("Telomere"),
     "settings_telomere_desc" : MessageLookupByLibrary.simpleMessage("Show a telomere beside the paragraph"),
     "settings_theme" : MessageLookupByLibrary.simpleMessage("Theme"),

@@ -91,5 +91,9 @@
     "settings_telomere": "Telomere",
     "@settings_telomere": {},
     "settings_telomere_desc": "Show a telomere beside the paragraph",
-    "@settings_telomere_desc": {}
+    "@settings_telomere_desc": {},
+    "settings_scrapmate": "ScrapMate",
+    "@settings_scrapmate": {},
+    "settings_scrapmate_about": "About ScrapMate",
+    "@settings_scrapmate_about": {}
 }

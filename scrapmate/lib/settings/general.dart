@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:preferences/preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intent/intent.dart' as android_intent;
+import 'package:scrapmate/util.dart';
+import 'package:package_info/package_info.dart';
 
 class SettingsGeneral extends StatefulWidget {
   @override
@@ -14,10 +16,20 @@ class _SettingsGeneralState extends State<SettingsGeneral>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  String _version = "";
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _version = info.version;
+    });
   }
 
   @override
@@ -88,6 +100,36 @@ class _SettingsGeneralState extends State<SettingsGeneral>
               AppLocalizations.of(context).settings_telomere, "telomere",
               desc: AppLocalizations.of(context).settings_telomere_desc,
               defaultVal: true),
+          PreferenceTitle(AppLocalizations.of(context).settings_scrapmate),
+          ListTile(
+            title: Text(AppLocalizations.of(context).settings_scrapmate_about),
+            onTap: () => {
+              showAboutDialog(
+                  context: context,
+                  applicationVersion: _version,
+                  children: [
+                    Flexible(child: Text("Powered by Flutter and Love <3")),
+                    RaisedButton(
+                      child: Text("GitHub"),
+                      onPressed: () => Util.openBrowser(
+                          "https://github.com/AioiLight/scrapmate", context),
+                    ),
+                    RaisedButton(
+                        child: Text("Twitter (@aioilight)"),
+                        onPressed: () => Util.openBrowser(
+                            "https://twitter.com/aioilight/", context)),
+                  ],
+                  applicationIcon: Container(
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      height: 64,
+                      width: 64,
+                    ),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                  ))
+            },
+          )
         ]));
   }
 }

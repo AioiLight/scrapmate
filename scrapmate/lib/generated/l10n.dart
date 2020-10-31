@@ -414,6 +414,26 @@ class S {
       args: [],
     );
   }
+
+  /// `ScrapMate`
+  String get settings_scrapmate {
+    return Intl.message(
+      'ScrapMate',
+      name: 'settings_scrapmate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About ScrapMate`
+  String get settings_scrapmate_about {
+    return Intl.message(
+      'About ScrapMate',
+      name: 'settings_scrapmate_about',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
