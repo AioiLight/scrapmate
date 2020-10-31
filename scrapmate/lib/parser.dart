@@ -211,14 +211,9 @@ class ScrapText extends ScrapLine {
           } else if (url != null) {
             final gyazo = Scrap.gyazo.firstMatch(url.input);
             if (gyazo != null) {
-              final herf = await Gyazo.getGyazoImage(url.input);
+              final ftr = Gyazo.getGyazoImage(url.input);
               span = TextSpan(
-                children: [
-                  WidgetSpan(
-                      child: InkWell(
-                          child: CachedNetworkImage(imageUrl: herf.url),
-                          onTap: () => Util.openBrowser(url.input, context)))
-                ],
+                children: [WidgetSpan(child: CachedGyazoImage(ftr))],
               );
             } else {
               span = TextSpan(
@@ -444,4 +439,25 @@ class Decorations {
   int strong = 0;
   int italic = 0;
   int strike = 0;
+}
+
+class CachedGyazoImage extends StatelessWidget {
+  CachedGyazoImage(this.oEmbedResult);
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: oEmbedResult,
+      builder: (context, AsyncSnapshot<GyazoOEmbedResult> snapshot) {
+        if (snapshot.hasData) {
+          return InkWell(
+              child: CachedNetworkImage(imageUrl: snapshot.data.url),
+              onTap: () => Util.openBrowser(snapshot.data.url, context));
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  final Future<GyazoOEmbedResult> oEmbedResult;
 }
