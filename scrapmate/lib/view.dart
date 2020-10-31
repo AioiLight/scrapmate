@@ -70,40 +70,21 @@ class _ScrapViewState extends State<ScrapView>
 
     return Scaffold(
         appBar: AppBar(
-            title: Text(args.pageTitle),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.share),
-                onPressed: () => {_openShare(args)},
-                tooltip: AppLocalizations.of(context).share,
-              ),
-              IconButton(
-                icon: Icon(Icons.open_in_browser),
-                onPressed: () => Util.openBrowser(
-                    Scrap.getPageUrl(args.projectDir, args.pageTitle), context),
-                tooltip: AppLocalizations.of(context).open_in_browser,
-              )
-            ],
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                var hasProjectPage = false;
-                Navigator.popUntil(context, (route) {
-                  if (route.settings.name == "/project") {
-                    hasProjectPage = true;
-                  }
-                  return true;
-                });
-
-                if (hasProjectPage) {
-                  Navigator.popUntil(context, ModalRoute.withName("/project"));
-                } else {
-                  Navigator.pushReplacementNamed(context, "/project",
-                      arguments:
-                          ProjectPageArgs(args.pageTitle, args.projectDir));
-                }
-              },
-            )),
+          title: Text(args.pageTitle),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: () => {_openShare(args)},
+              tooltip: AppLocalizations.of(context).share,
+            ),
+            IconButton(
+              icon: Icon(Icons.open_in_browser),
+              onPressed: () => Util.openBrowser(
+                  Scrap.getPageUrl(args.projectDir, args.pageTitle), context),
+              tooltip: AppLocalizations.of(context).open_in_browser,
+            )
+          ],
+        ),
         body: Container(
             child: _result != null
                 ? FutureBuilder(

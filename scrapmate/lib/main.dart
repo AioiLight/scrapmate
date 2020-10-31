@@ -136,6 +136,8 @@ class _MyHomePageState extends State<MyHomePage>
     final page = Scrap.scrapboxPage.firstMatch(initialLink);
 
     if (page != null) {
+      Util.openProjectPage(context, page.group(1).replaceAll("/", ""),
+          page.group(1).replaceAll("/", ""));
       Util.openScrapPage(context, page.group(2).replaceAll("/", ""),
           page.group(1).replaceAll("/", ""));
     } else if (project != null) {
