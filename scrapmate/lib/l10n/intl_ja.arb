@@ -34,13 +34,13 @@
     "settings_black_theme": "ブラックテーマ",
     "settings_black_theme_desc": "ダークテーマを使用するときは真っ黒の背景色を使用する",
     "settings_scrapbox": "Scrapbox",
-    "settings_grid": "グリッドの列数",
-    "settings_grid_desc": "プロジェクトページのグリッドの列数",
-    "settings_telomere": "テロメア",
-    "settings_telomere_desc": "段落の横にテロメアを表示する",
     "settings_loading_images": "画像の読み込み",
     "settings_loading_images_desc": "画像の読み込みを抑制してモバイルデータの使用を削減します",
     "settings_loading_images_always": "常に読み込む",
     "settings_loading_images_wifi": "Wi-Fi 接続時のみ",
-    "settings_loading_images_never": "読み込まない"
+    "settings_loading_images_never": "読み込まない",
+    "settings_grid": "グリッドの列数",
+    "settings_grid_desc": "プロジェクトページのグリッドの列数",
+    "settings_telomere": "テロメア",
+    "settings_telomere_desc": "段落の横にテロメアを表示する"
 }
