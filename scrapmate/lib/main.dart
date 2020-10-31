@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:preferences/preferences.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/projectPage.dart';
@@ -10,6 +11,7 @@ import 'package:scrapmate/view.dart';
 import 'package:scrapmate/widgets/addProjectDialog.dart';
 import 'package:scrapmate/widgets/project.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:uni_links/uni_links.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage>
   AnimationController _controller;
 
   var _list = List<ScrapboxProjectPref>();
+  bool _inited = false;
 
   void _onReorder(int oldIndex, int newIndex) {
     if (mounted) {
@@ -111,6 +114,36 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
+  Future<Null> _processInitalLink(BuildContext context) async {
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      final initialLink = await getInitialLink();
+
+      if (initialLink == null) {
+        return;
+      }
+      _openLink(initialLink, context);
+    } on PlatformException {}
+
+    getLinksStream().listen((String link) {
+      _openLink(link, context);
+    }, onError: (err) {});
+    _inited = true;
+  }
+
+  void _openLink(String initialLink, BuildContext context) {
+    final project = Scrap.scrapboxProject.firstMatch(initialLink);
+    final page = Scrap.scrapboxPage.firstMatch(initialLink);
+
+    if (page != null) {
+      Util.openScrapPage(context, page.group(2).replaceAll("/", ""),
+          page.group(1).replaceAll("/", ""));
+    } else if (project != null) {
+      Util.openProjectPage(context, project.group(1).replaceAll("/", ""),
+          project.group(1).replaceAll("/", ""));
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -122,6 +155,15 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_inited) {
+      _processInitalLink(context);
+    }
   }
 
   void _addProject(String projectURL) async {

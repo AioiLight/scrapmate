@@ -4,6 +4,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -51,6 +52,12 @@ class Util {
     } else {
       showToast(AppLocalizations.of(context).open_in_browser_failed);
     }
+  }
+
+  static void openProjectPage(
+      BuildContext context, String title, String projectDir) {
+    Navigator.pushNamed(context, "/project",
+        arguments: ProjectPageArgs(title, projectDir));
   }
 
   static void openScrapPage(
