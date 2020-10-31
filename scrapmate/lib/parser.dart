@@ -31,7 +31,7 @@ class Parser {
         i += codes.length - 1;
 
         l = ScrapCode(indent, line, context, projectDir,
-            lang: codes.first.text.substring("code:".length),
+            lang: codes.first.text.trim().substring("code:".length),
             codes: codes.skip(1).map((e) => e.text).toList());
       } else if (text.trimLeft().startsWith("table:")) {
         // テーブル
@@ -40,7 +40,7 @@ class Parser {
 
         l = ScrapTable(indent, line, context, projectDir,
             rows: table.skip(1).map((e) => e.text.trim()).toList(),
-            title: table.first.text.substring("table:".length));
+            title: table.first.text.trim().substring("table:".length));
       } else {
         // ただの段落。
         l = ScrapText(indent, line, context, projectDir, text: text);
@@ -309,7 +309,20 @@ class ScrapCode extends ScrapLine {
 
   Widget generate() {
     final md = "```$lang\n" + codes.join("\n") + "\n```";
-    return Flexible(child: MarkdownBody(data: md, selectable: true));
+    return Flexible(
+        child: Column(children: [
+      Row(
+        children: [
+          Icon(Icons.code),
+          Text(lang),
+        ],
+      ),
+      MarkdownBody(
+        data: md,
+        selectable: true,
+        fitContent: false,
+      )
+    ]));
   }
 }
 
