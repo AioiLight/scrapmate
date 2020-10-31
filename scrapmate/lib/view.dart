@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/parser.dart';
+import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/util.dart';
 import 'package:share/share.dart';
 import 'scrap.dart';
@@ -87,7 +88,21 @@ class _ScrapViewState extends State<ScrapView>
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName("/project"));
+                var hasProjectPage = false;
+                Navigator.popUntil(context, (route) {
+                  if (route.settings.name == "/project") {
+                    hasProjectPage = true;
+                  }
+                  return true;
+                });
+
+                if (hasProjectPage) {
+                  Navigator.popUntil(context, ModalRoute.withName("/project"));
+                } else {
+                  Navigator.pushReplacementNamed(context, "/project",
+                      arguments:
+                          ProjectPageArgs(args.pageTitle, args.projectDir));
+                }
               },
             )),
         body: Container(
