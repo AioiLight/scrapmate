@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "settings_black_theme" : MessageLookupByLibrary.simpleMessage("Black theme"),
     "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("Use pure black background color when using dark theme"),
+    "settings_delete_cache" : MessageLookupByLibrary.simpleMessage("Delete cache"),
+    "settings_delete_cache_desc" : MessageLookupByLibrary.simpleMessage("Delete ScrapMate\'s cache in Android settings"),
     "settings_grid" : MessageLookupByLibrary.simpleMessage("Number of grid columns"),
     "settings_grid_desc" : MessageLookupByLibrary.simpleMessage("Number of grid columns in project page"),
     "settings_loading_images" : MessageLookupByLibrary.simpleMessage("Loading images"),

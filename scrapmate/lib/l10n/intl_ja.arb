@@ -39,6 +39,8 @@
     "settings_loading_images_always": "常に読み込む",
     "settings_loading_images_wifi": "Wi-Fi 接続時のみ",
     "settings_loading_images_never": "読み込まない",
+    "settings_delete_cache": "キャッシュの削除",
+    "settings_delete_cache_desc": "Android の設定で ScrapMate のキャッシュを削除する",
     "settings_grid": "グリッドの列数",
     "settings_grid_desc": "プロジェクトページのグリッドの列数",
     "settings_telomere": "テロメア",

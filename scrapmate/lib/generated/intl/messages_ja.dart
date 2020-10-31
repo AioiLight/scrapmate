@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings" : MessageLookupByLibrary.simpleMessage("設定"),
     "settings_black_theme" : MessageLookupByLibrary.simpleMessage("ブラックテーマ"),
     "settings_black_theme_desc" : MessageLookupByLibrary.simpleMessage("ダークテーマを使用するときは真っ黒の背景色を使用する"),
+    "settings_delete_cache" : MessageLookupByLibrary.simpleMessage("キャッシュの削除"),
+    "settings_delete_cache_desc" : MessageLookupByLibrary.simpleMessage("Android の設定で ScrapMate のキャッシュを削除する"),
     "settings_grid" : MessageLookupByLibrary.simpleMessage("グリッドの列数"),
     "settings_grid_desc" : MessageLookupByLibrary.simpleMessage("プロジェクトページのグリッドの列数"),
     "settings_loading_images" : MessageLookupByLibrary.simpleMessage("画像の読み込み"),

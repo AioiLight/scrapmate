@@ -1,6 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intent/extra.dart';
 import 'package:preferences/preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intent/intent.dart' as android_intent;
+import 'package:intent/action.dart' as android_action;
 
 class SettingsGeneral extends StatefulWidget {
   @override
@@ -65,6 +70,18 @@ class _SettingsGeneralState extends State<SettingsGeneral>
                 1,
                 2
               ]),
+          if (Platform.isAndroid)
+            ListTile(
+              title: Text(AppLocalizations.of(context).settings_delete_cache),
+              subtitle:
+                  Text(AppLocalizations.of(context).settings_delete_cache_desc),
+              onTap: () => {
+                android_intent.Intent()
+                  ..setAction("android.settings.APPLICATION_DETAILS_SETTINGS")
+                  ..setData(Uri.parse("package:space.aioilight.scrapmate"))
+                  ..startActivity()
+              },
+            ),
           DropdownPreference(AppLocalizations.of(context).settings_grid, "grid",
               desc: AppLocalizations.of(context).settings_grid_desc,
               defaultVal: 3,

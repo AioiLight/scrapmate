@@ -305,46 +305,6 @@ class S {
     );
   }
 
-  /// `Number of grid columns`
-  String get settings_grid {
-    return Intl.message(
-      'Number of grid columns',
-      name: 'settings_grid',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Number of grid columns in project page`
-  String get settings_grid_desc {
-    return Intl.message(
-      'Number of grid columns in project page',
-      name: 'settings_grid_desc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Telomere`
-  String get settings_telomere {
-    return Intl.message(
-      'Telomere',
-      name: 'settings_telomere',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Show a telomere beside the paragraph`
-  String get settings_telomere_desc {
-    return Intl.message(
-      'Show a telomere beside the paragraph',
-      name: 'settings_telomere_desc',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Loading images`
   String get settings_loading_images {
     return Intl.message(
@@ -390,6 +350,66 @@ class S {
     return Intl.message(
       'Never',
       name: 'settings_loading_images_never',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete cache`
+  String get settings_delete_cache {
+    return Intl.message(
+      'Delete cache',
+      name: 'settings_delete_cache',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete ScrapMate's cache in Android settings`
+  String get settings_delete_cache_desc {
+    return Intl.message(
+      'Delete ScrapMate\'s cache in Android settings',
+      name: 'settings_delete_cache_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of grid columns`
+  String get settings_grid {
+    return Intl.message(
+      'Number of grid columns',
+      name: 'settings_grid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of grid columns in project page`
+  String get settings_grid_desc {
+    return Intl.message(
+      'Number of grid columns in project page',
+      name: 'settings_grid_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Telomere`
+  String get settings_telomere {
+    return Intl.message(
+      'Telomere',
+      name: 'settings_telomere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show a telomere beside the paragraph`
+  String get settings_telomere_desc {
+    return Intl.message(
+      'Show a telomere beside the paragraph',
+      name: 'settings_telomere_desc',
       desc: '',
       args: [],
     );
