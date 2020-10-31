@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:preferences/preference_service.dart';
-import 'package:scrapmate/const.dart';
 import 'package:scrapmate/parser.dart';
 import 'package:scrapmate/projectPage.dart';
 import 'package:scrapmate/util.dart';
@@ -107,10 +106,19 @@ class _ScrapViewState extends State<ScrapView>
             )),
         body: Container(
             child: _result != null
-                ? ListView(
-                    children: Parser.parse(
+                ? FutureBuilder(
+                    future: Parser.parse(
                         _result, context, args.projectDir, showImage),
-                    padding: Const.Edge,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Widget>> snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView(
+                          children: snapshot.data,
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
                   )
                 : Center(child: CircularProgressIndicator())));
   }

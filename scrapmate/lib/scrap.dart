@@ -12,6 +12,10 @@ class Scrap {
     return "${getProjectUrl(projectPath)}$pageName";
   }
 
+  static String getIconUrl(String projectDir, String pageName) {
+    return "https://scrapbox.io/api/pages/$projectDir/$pageName/icon";
+  }
+
   static Future<http.Response> fetch(String path,
       {Map<String, String> params}) {
     final uri = Uri.https("scrapbox.io", path, params);
@@ -114,6 +118,7 @@ class Scrap {
   static final scrapboxProject = RegExp(r"^https?://scrapbox.io/(.+)/?$");
   static final scrapboxPage = RegExp(r"^https?://scrapbox.io/(.+)/(.+)/?$");
   static final gyazo = RegExp(r"https?://(?:i.)?gyazo.com/(.+)");
+  static final icon = RegExp(r"^(.+)\.icon$");
 }
 
 class ScrapboxProjectPref {

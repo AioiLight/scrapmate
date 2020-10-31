@@ -6,14 +6,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/const.dart';
+import 'package:scrapmate/gyazo.dart';
 import 'package:scrapmate/util.dart';
 import 'package:scrapmate/widgets/telomere.dart';
 import 'package:syntax_highlighter/syntax_highlighter.dart';
 import 'scrap.dart';
 
 class Parser {
-  static List<Widget> parse(ScrapboxPageResult scrap, BuildContext context,
-      String projectDir, bool showImage) {
+  static Future<List<Widget>> parse(ScrapboxPageResult scrap,
+      BuildContext context, String projectDir, bool showImage) async {
     final result = List<Widget>();
 
     // タイトル行スキップ
@@ -61,7 +62,7 @@ class Parser {
               Container(
                 width: 24 + 1.0 * indent * 8,
               ),
-              lineWidget
+              await lineWidget
             ],
           )
         ],
@@ -96,7 +97,7 @@ class Parser {
 abstract class ScrapLine {
   ScrapLine(this.level, this.info, this.context, this.projectDir);
 
-  Widget generate();
+  Future<Widget> generate();
 
   final int level;
   final ScrapboxPageResultLines info;
@@ -114,7 +115,7 @@ class ScrapText extends ScrapLine {
   final linkStyle = TextStyle(
       color: Colors.accents.first, decoration: TextDecoration.underline);
 
-  List<TextSpan> _getSpan(String str, {TextStyle style}) {
+  Future<List<TextSpan>> _getSpan(String str, {TextStyle style}) async {
     final list = List<TextSpan>();
 
     str = str.trim();
@@ -152,12 +153,14 @@ class ScrapText extends ScrapLine {
           final style = _getParseText(_getDecorations(deco.namedGroup("type")));
 
           list.add(TextSpan(
-              children: _getSpan(deco.namedGroup("content"), style: style)));
+              children:
+                  await _getSpan(deco.namedGroup("content"), style: style)));
         } else if (first == bracketLink) {
           // リンク
           final content = bracketLink.group(1) + bracketLink.group(2);
           final url = Scrap.url.firstMatch(content);
           final titled = Scrap.titledLink.firstMatch(content);
+          final icon = Scrap.icon.firstMatch(content);
 
           TextSpan span;
 
@@ -208,13 +211,13 @@ class ScrapText extends ScrapLine {
           } else if (url != null) {
             final gyazo = Scrap.gyazo.firstMatch(url.input);
             if (gyazo != null) {
-              final herf = "https://i.gyazo.com/${gyazo.group(1)}.png";
+              final herf = await Gyazo.getGyazoImage(url.input);
               span = TextSpan(
                 children: [
                   WidgetSpan(
                       child: InkWell(
-                          child: CachedNetworkImage(imageUrl: herf),
-                          onTap: () => Util.openBrowser(herf, context)))
+                          child: CachedNetworkImage(imageUrl: herf.url),
+                          onTap: () => Util.openBrowser(url.input, context)))
                 ],
               );
             } else {
@@ -224,6 +227,20 @@ class ScrapText extends ScrapLine {
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => Util.openBrowser(url.input, context));
             }
+          } else if (icon != null) {
+            final herf = Scrap.getIconUrl(projectDir, icon.group(1));
+            span = TextSpan(
+              children: [
+                WidgetSpan(
+                    child: InkWell(
+                        child: CachedNetworkImage(
+                          imageUrl: herf,
+                          width: Const.defaultFontSize,
+                        ),
+                        onTap: () => Util.openScrapPage(
+                            context, projectDir, icon.group(1))))
+              ],
+            );
           } else {
             span = _getInternalLinkSpan(content, style, context, projectDir);
           }
@@ -319,11 +336,11 @@ class ScrapText extends ScrapLine {
     );
   }
 
-  Widget generate() {
+  Future<Widget> generate() async {
     return Flexible(
         child: RichText(
             text: TextSpan(
-      children: _getSpan(text),
+      children: await _getSpan(text),
       style: TextStyle(height: 1.8),
     )));
   }
@@ -338,7 +355,7 @@ class ScrapCode extends ScrapLine {
   final String lang;
   final List<String> codes;
 
-  Widget generate() {
+  Future<Widget> generate() async {
     final md = "```$lang\n" + codes.join("\n") + "\n```";
     return Flexible(
         child: Column(children: [
@@ -381,7 +398,7 @@ class ScrapTable extends ScrapLine {
     return Table(children: rows.map((e) => _getRow(e)).toList());
   }
 
-  Widget generate() {
+  Future<Widget> generate() async {
     return Flexible(
         child: Column(children: [
       Row(children: [Icon(Icons.table_view), Text(title ?? "")]),
@@ -399,12 +416,12 @@ class ScraoQuote extends ScrapLine {
       {this.content})
       : super(level, info, context, projectDir);
 
-  Widget generate() {
+  Future<Widget> generate() async {
     return Expanded(
       child: Container(
         child: Stack(
           children: [
-            ScrapText(level, info, context, projectDir,
+            await ScrapText(level, info, context, projectDir,
                     text: content.substring(1))
                 .generate(),
             Positioned(
