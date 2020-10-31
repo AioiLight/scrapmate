@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -186,18 +187,43 @@ class ScrapText extends ScrapLine {
               span = _getInternalLinkSpan(content, style, context, projectDir);
             }
             if (before || after) {
-              span = span = TextSpan(
-                  text: text,
-                  style: style,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Util.openBrowser(url, context));
+              final gyazo = Scrap.gyazo.firstMatch(text);
+              if (gyazo != null) {
+                span = TextSpan(
+                  children: [
+                    WidgetSpan(
+                        child: InkWell(
+                            child: CachedNetworkImage(imageUrl: text),
+                            onTap: () => Util.openBrowser(url, context)))
+                  ],
+                );
+              } else {
+                span = TextSpan(
+                    text: text,
+                    style: style,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Util.openBrowser(url, context));
+              }
             }
           } else if (url != null) {
-            span = TextSpan(
-                text: url.input,
-                style: style,
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () => Util.openBrowser(url.input, context));
+            final gyazo = Scrap.gyazo.firstMatch(url.input);
+            if (gyazo != null) {
+              final herf = "https://i.gyazo.com/${gyazo.group(1)}.png";
+              span = TextSpan(
+                children: [
+                  WidgetSpan(
+                      child: InkWell(
+                          child: CachedNetworkImage(imageUrl: herf),
+                          onTap: () => Util.openBrowser(herf, context)))
+                ],
+              );
+            } else {
+              span = TextSpan(
+                  text: url.input,
+                  style: style,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Util.openBrowser(url.input, context));
+            }
           } else {
             span = _getInternalLinkSpan(content, style, context, projectDir);
           }
@@ -295,10 +321,11 @@ class ScrapText extends ScrapLine {
 
   Widget generate() {
     return Flexible(
-        child: SelectableText.rich(
-      TextSpan(children: _getSpan(text)),
+        child: RichText(
+            text: TextSpan(
+      children: _getSpan(text),
       style: TextStyle(height: 1.8),
-    ));
+    )));
   }
 }
 
