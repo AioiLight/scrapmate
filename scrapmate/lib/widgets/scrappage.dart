@@ -44,24 +44,26 @@ class _ScrapPageState extends State<ScrapPage>
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Stack(children: [
-        ListTile(
-          title: Text(widget.title),
-          subtitle: (widget.thumbnail != null && widget.showImage)
-              ? CachedNetworkImage(
-                  imageUrl: widget.thumbnail,
-                  errorWidget: (context, url, error) => Text(widget.lead))
-              : Text(widget.lead),
-          onTap: () =>
-              Util.openScrapPage(context, widget.title, widget.projectUrl),
-        ),
-        if (widget.pin)
-          Positioned(
-            child: Icon(Icons.push_pin),
-            right: 0,
-            bottom: 0,
-          )
-      ]),
+      child: InkWell(
+        child: Stack(children: [
+          ListTile(
+            title: Text(widget.title),
+            subtitle: (widget.thumbnail != null && widget.showImage)
+                ? CachedNetworkImage(
+                    imageUrl: widget.thumbnail,
+                    errorWidget: (context, url, error) => Text(widget.lead))
+                : Text(widget.lead),
+          ),
+          if (widget.pin)
+            Positioned(
+              child: Icon(Icons.push_pin),
+              right: 0,
+              bottom: 0,
+            )
+        ]),
+        onTap: () =>
+            Util.openScrapPage(context, widget.title, widget.projectUrl),
+      ),
       clipBehavior: Clip.antiAlias,
     );
   }
