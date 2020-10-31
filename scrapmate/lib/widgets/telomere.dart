@@ -13,8 +13,6 @@ class Telomere extends StatelessWidget {
 
     var width = 1;
 
-    print(diff);
-
     if (diff > 60 * 60 * 24 * 365) {
       // 1年
       width = 2;
@@ -58,9 +56,6 @@ class Telomere extends StatelessWidget {
       // 0時間
       width = 15;
     }
-    print("今 ${0.001 * now.millisecondsSinceEpoch}");
-    print("更新 $time");
-    print("横幅 $width");
     return Container(
       color: Colors.green,
       width: 1.0 * width,

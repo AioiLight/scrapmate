@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:recursive_regex/recursive_regex.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -102,7 +103,10 @@ class Scrap {
     return result;
   }
 
-  static final decoration = RegExp(r"\[([*/-]+) (.+)\]");
+  static final decoration = RecursiveRegex(
+      startDelimiter: RegExp(r"\[(?<type>[*/-]+)"),
+      endDelimiter: RegExp(r"\]"),
+      captureGroupName: "content");
   static final link = RegExp(r"\[([^*/-]+?)(.+?)\]");
   static final titledLink = RegExp(r"(.+) (.+)");
   static final url = RegExp(r"https?://[\w/:%#\$&\?\(\)~\.=\+\-]+");

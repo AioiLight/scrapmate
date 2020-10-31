@@ -111,7 +111,6 @@ class ScrapText extends ScrapLine {
 
       if (deco == null && link == null) {
         list.add(TextSpan(text: str, style: style));
-        print("普通の文字: $str");
         str = "";
         continue;
       }
@@ -130,10 +129,13 @@ class ScrapText extends ScrapLine {
         // 装飾・リンクなど
         if (first == deco) {
           // 装飾
-          final style = _getParseText(_getDecorations(deco.group(1)));
+          final style = _getParseText(_getDecorations(deco.namedGroup("type")));
 
-          list.add(TextSpan(children: _getSpan(deco.group(2), style: style)));
-          print("装飾: ${deco.group(2)}");
+          print(deco.namedGroup("type"));
+          print(deco.namedGroup("content"));
+
+          list.add(TextSpan(
+              children: _getSpan(deco.namedGroup("content"), style: style)));
         } else if (first == link) {
           // リンク
           final content = link.group(1) + link.group(2);
@@ -187,7 +189,6 @@ class ScrapText extends ScrapLine {
 
           if (span != null) {
             list.add(span);
-            print("リンク: ${link.group(1)}");
           }
         }
         str = str.substring(first.end);
