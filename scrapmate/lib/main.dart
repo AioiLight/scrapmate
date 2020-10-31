@@ -14,8 +14,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefService.init(prefix: 'pref_');
-  PrefService.setDefaultValues(
-      {"theme": 0, "blackTheme": false, "grid": 3, "telomere": true});
+  PrefService.setDefaultValues({
+    "theme": 0,
+    "blackTheme": false,
+    "grid": 3,
+    "telomere": true,
+    "loadingImages": 0
+  });
   runApp(MyApp());
 }
 

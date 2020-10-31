@@ -344,6 +344,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Loading images`
+  String get settings_loading_images {
+    return Intl.message(
+      'Loading images',
+      name: 'settings_loading_images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reduce mobile data without loading images`
+  String get settings_loading_images_desc {
+    return Intl.message(
+      'Reduce mobile data without loading images',
+      name: 'settings_loading_images_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Always`
+  String get settings_loading_images_always {
+    return Intl.message(
+      'Always',
+      name: 'settings_loading_images_always',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wi-Fi only`
+  String get settings_loading_images_wifi {
+    return Intl.message(
+      'Wi-Fi only',
+      name: 'settings_loading_images_wifi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Never`
+  String get settings_loading_images_never {
+    return Intl.message(
+      'Never',
+      name: 'settings_loading_images_never',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

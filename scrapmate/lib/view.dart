@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:preferences/preference_service.dart';
 import 'package:scrapmate/const.dart';
 import 'package:scrapmate/parser.dart';
 import 'package:scrapmate/util.dart';
@@ -20,6 +21,7 @@ class _ScrapViewState extends State<ScrapView>
 
   Future<ScrapboxPageResult> _scrapboxPageResult;
   ScrapboxPageResult _result;
+  bool _isWifi;
 
   void _loaded(ScrapboxPageResult result) {
     if (mounted) {
@@ -48,6 +50,10 @@ class _ScrapViewState extends State<ScrapView>
     _scrapboxPageResult =
         Scrap.getPage(Scrap.getJsonPages(args.projectDir, args.pageTitle));
     _scrapboxPageResult.then((value) => _loaded(value));
+
+    Util.isUsingWiFi().then((value) => setState(() {
+          _isWifi = value;
+        }));
   }
 
   @override
@@ -59,6 +65,8 @@ class _ScrapViewState extends State<ScrapView>
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as ScrapViewArgs;
+    final imageSettings = PrefService.getInt("loadingImages");
+    final showImage = imageSettings == 0 || (_isWifi && imageSettings == 1);
 
     return Scaffold(
         appBar: AppBar(
@@ -85,7 +93,8 @@ class _ScrapViewState extends State<ScrapView>
         body: Container(
             child: _result != null
                 ? ListView(
-                    children: Parser.parse(_result, context, args.projectDir),
+                    children: Parser.parse(
+                        _result, context, args.projectDir, showImage),
                     padding: Const.Edge,
                   )
                 : Center(child: CircularProgressIndicator())));

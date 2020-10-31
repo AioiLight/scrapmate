@@ -9,8 +9,8 @@ import 'package:scrapmate/widgets/telomere.dart';
 import 'scrap.dart';
 
 class Parser {
-  static List<Widget> parse(
-      ScrapboxPageResult scrap, BuildContext context, String projectDir) {
+  static List<Widget> parse(ScrapboxPageResult scrap, BuildContext context,
+      String projectDir, bool showImage) {
     final result = List<Widget>();
 
     // タイトル行スキップ

@@ -50,6 +50,21 @@ class _SettingsGeneralState extends State<SettingsGeneral>
               desc: AppLocalizations.of(context).settings_black_theme_desc,
               defaultVal: false),
           PreferenceTitle(AppLocalizations.of(context).settings_scrapbox),
+          DropdownPreference(
+              AppLocalizations.of(context).settings_loading_images,
+              "loadingImages",
+              desc: AppLocalizations.of(context).settings_loading_images_desc,
+              defaultVal: 0,
+              displayValues: [
+                AppLocalizations.of(context).settings_loading_images_always,
+                AppLocalizations.of(context).settings_loading_images_wifi,
+                AppLocalizations.of(context).settings_loading_images_never
+              ],
+              values: [
+                0,
+                1,
+                2
+              ]),
           DropdownPreference(AppLocalizations.of(context).settings_grid, "grid",
               desc: AppLocalizations.of(context).settings_grid_desc,
               defaultVal: 3,

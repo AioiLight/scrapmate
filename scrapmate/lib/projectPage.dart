@@ -22,6 +22,7 @@ class _ProjectPageState extends State<ProjectPage>
   List<ScrapboxPageListResultPage> _itemsResult;
   bool _loading = false;
   bool _allLoaded = false;
+  bool _isWifi = false;
 
   void _loaded(List<ScrapboxPageListResultPage> result) {
     if (mounted) {
@@ -74,6 +75,10 @@ class _ProjectPageState extends State<ProjectPage>
     final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
     _items = Scrap.getPages(Scrap.getJsonUserTop(args.dir));
     _items.then((value) => _loaded(value));
+
+    Util.isUsingWiFi().then((value) => setState(() {
+          _isWifi = value;
+        }));
   }
 
   @override
@@ -85,6 +90,8 @@ class _ProjectPageState extends State<ProjectPage>
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
+    final imageSettings = PrefService.getInt("loadingImages");
+    final showImage = imageSettings == 0 || (_isWifi && imageSettings == 1);
 
     return Scaffold(
       appBar: AppBar(
@@ -137,6 +144,7 @@ class _ProjectPageState extends State<ProjectPage>
                     thumbnail: item.image,
                     projectUrl: args.dir,
                     pin: item.pin > 0,
+                    showImage: showImage,
                   );
                 },
               )

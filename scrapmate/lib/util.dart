@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +12,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'scrap.dart';
 
 class Util {
+  static Future<bool> isUsingWiFi() async {
+    final result = await Connectivity().checkConnectivity();
+    if (result == ConnectivityResult.wifi) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future<List<ScrapboxProjectPref>> getPrefProjects() async {
     final pref = await SharedPreferences.getInstance();
     final result = pref.getString("projects") ?? "[]";

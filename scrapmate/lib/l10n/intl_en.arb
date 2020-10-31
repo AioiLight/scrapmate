@@ -77,5 +77,15 @@
     "settings_telomere": "Telomere",
     "@settings_telomere": {},
     "settings_telomere_desc": "Show a telomere beside the paragraph",
-    "@settings_telomere_desc": {}
+    "@settings_telomere_desc": {},
+    "settings_loading_images": "Loading images",
+    "@settings_loading_images": {},
+    "settings_loading_images_desc": "Reduce mobile data without loading images",
+    "@settings_loading_images_desc": {},
+    "settings_loading_images_always": "Always",
+    "@settings_loading_images_always": {},
+    "settings_loading_images_wifi": "Wi-Fi only",
+    "@settings_loading_images_wifi": {},
+    "settings_loading_images_never": "Never",
+    "@settings_loading_images_never": {}
 }

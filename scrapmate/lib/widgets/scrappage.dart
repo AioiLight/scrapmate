@@ -10,7 +10,8 @@ class ScrapPage extends StatefulWidget {
       this.thumbnail,
       this.id,
       this.projectUrl,
-      this.pin});
+      this.pin,
+      this.showImage});
 
   final String title;
   final String lead;
@@ -18,6 +19,7 @@ class ScrapPage extends StatefulWidget {
   final String id;
   final String projectUrl;
   final bool pin;
+  final bool showImage;
 
   @override
   _ScrapPageState createState() => _ScrapPageState();
@@ -45,7 +47,7 @@ class _ScrapPageState extends State<ScrapPage>
       child: Stack(children: [
         ListTile(
           title: Text(widget.title),
-          subtitle: widget.thumbnail != null
+          subtitle: (widget.thumbnail != null && widget.showImage)
               ? CachedNetworkImage(
                   imageUrl: widget.thumbnail,
                   errorWidget: (context, url, error) => Text(widget.lead))
