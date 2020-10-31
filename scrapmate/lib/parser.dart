@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:preferences/preference_service.dart';
@@ -41,6 +42,8 @@ class Parser {
         l = ScrapTable(indent, line, context, projectDir,
             rows: table.skip(1).map((e) => e.text.trim()).toList(),
             title: table.first.text.trim().substring("table:".length));
+      } else if (text.trimLeft().startsWith(">")) {
+        l = ScraoQuote(indent, line, context, projectDir, content: text);
       } else {
         // ただの段落。
         l = ScrapText(indent, line, context, projectDir, text: text);
@@ -360,6 +363,36 @@ class ScrapTable extends ScrapLine {
 
   final List<String> rows;
   final String title;
+}
+
+class ScraoQuote extends ScrapLine {
+  ScraoQuote(int level, ScrapboxPageResultLines info, BuildContext context,
+      String projectDir,
+      {this.content})
+      : super(level, info, context, projectDir);
+
+  Widget generate() {
+    return Expanded(
+      child: Container(
+        child: Stack(
+          children: [
+            ScrapText(level, info, context, projectDir,
+                    text: content.substring(1))
+                .generate(),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Icon(Icons.format_quote),
+            )
+          ],
+        ),
+        color: Theme.of(context).primaryColor,
+      ),
+      flex: 1,
+    );
+  }
+
+  final String content;
 }
 
 class Decorations {
