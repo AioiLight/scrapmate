@@ -113,6 +113,7 @@ class Scrap {
   static final inlineCode = RegExp(r"`(.*?)`");
   static final scrapboxProject = RegExp(r"^https?://scrapbox.io/(.+)/?$");
   static final scrapboxPage = RegExp(r"^https?://scrapbox.io/(.+)/(.+)/?$");
+  static final gyazo = RegExp(r"https?://gyazo.com/.+");
 }
 
 class ScrapboxProjectPref {

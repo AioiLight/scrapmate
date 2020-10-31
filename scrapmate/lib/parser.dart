@@ -166,30 +166,31 @@ class ScrapText extends ScrapLine {
             final before = Scrap.url.hasMatch(titled.group(1));
             final after = Scrap.url.hasMatch(titled.group(2));
 
+            var text = "";
+            var url = "";
+
             if (before && after) {
               // 前も後ろもリンクっぽい = 前がリンクになる
-              span = TextSpan(
-                  text: titled.group(2),
-                  style: style,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Util.openBrowser(titled.group(1), context));
+              text = titled.group(2);
+              url = titled.group(1);
             } else if (after) {
               // 後ろがリンクっぽい = 後ろがリンクになる
-              span = TextSpan(
-                  text: titled.group(1),
-                  style: style,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Util.openBrowser(titled.group(2), context));
+              text = titled.group(1);
+              url = titled.group(2);
             } else if (before) {
               // 前がリンクっぽい = 前がリンクになる
-              span = TextSpan(
-                  text: titled.group(2),
-                  style: style,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Util.openBrowser(titled.group(1), context));
+              text = titled.group(2);
+              url = titled.group(1);
             } else {
               // どちらもリンクじゃない = スペースのある内部リンク
               span = _getInternalLinkSpan(content, style, context, projectDir);
+            }
+            if (before || after) {
+              span = span = TextSpan(
+                  text: text,
+                  style: style,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Util.openBrowser(url, context));
             }
           } else if (url != null) {
             span = TextSpan(
