@@ -120,6 +120,9 @@ class Scrap {
   static final gyazo = RegExp(r"https?://(?:i.)?gyazo.com/(.+)");
   static final icon = RegExp(r"^(.+)\.icon$");
   static final hashTag = RegExp(r"#(\S+)");
+  static final nonProjectUrl = RegExp(
+      r"product|features|pricing|case|support|contact|enterprise|try-enterprise|terms|privacy|jp-commercial-act");
+  static final nonPageUrl = RegExp(r"login/google");
 }
 
 class ScrapboxProjectPref {

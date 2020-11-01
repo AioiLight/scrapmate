@@ -205,6 +205,16 @@ class S {
     );
   }
 
+  /// `Unable to open Scrapbox because URL is invalid`
+  String get scrap_invalid_url {
+    return Intl.message(
+      'Unable to open Scrapbox because URL is invalid',
+      name: 'scrap_invalid_url',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message(

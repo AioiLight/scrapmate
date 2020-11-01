@@ -23,6 +23,7 @@
     "scrap_network_error": "Scrapbox に接続できません。インターネットに接続されていることを確認してください。",
     "scrap_404": "Scrapbox プロジェクトが見つかりませんでした",
     "scrap_403": "メンバーではないため Scrapbox プロジェクトにアクセスできません",
+    "scrap_invalid_url": "URL が無効のため Scrapbox を開けません",
 
     "settings": "設定",
     "settings_looks": "見た目",

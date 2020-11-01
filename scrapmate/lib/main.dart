@@ -136,11 +136,21 @@ class _MyHomePageState extends State<MyHomePage>
     final page = Scrap.scrapboxPage.firstMatch(initialLink);
 
     if (page != null) {
+      if (Scrap.nonPageUrl.hasMatch(page.group(1) + "/" + page.group(2))) {
+        Util.showToast(AppLocalizations.of(context).scrap_invalid_url);
+        return;
+      }
+
       Util.openProjectPage(context, page.group(1).replaceAll("/", ""),
           page.group(1).replaceAll("/", ""));
       Util.openScrapPage(context, page.group(2).replaceAll("/", ""),
           page.group(1).replaceAll("/", ""));
     } else if (project != null) {
+      if (Scrap.nonProjectUrl.hasMatch(project.group(1))) {
+        Util.showToast(AppLocalizations.of(context).scrap_invalid_url);
+        return;
+      }
+
       Util.openProjectPage(context, project.group(1).replaceAll("/", ""),
           project.group(1).replaceAll("/", ""));
     }

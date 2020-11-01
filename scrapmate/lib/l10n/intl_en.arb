@@ -49,6 +49,8 @@
     "@scrap_404": {},
     "scrap_403": "Unable to access Scrapbox project because you are not a member",
     "@scrap_403": {},
+    "scrap_invalid_url": "Unable to open Scrapbox because URL is invalid",
+    "@scrap_invalid_url": {},
     
     "settings": "Settings",
     "@settings": {},

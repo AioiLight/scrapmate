@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "project_removed" : m1,
     "scrap_403" : MessageLookupByLibrary.simpleMessage("Unable to access Scrapbox project because you are not a member"),
     "scrap_404" : MessageLookupByLibrary.simpleMessage("Scrapbox project not found"),
+    "scrap_invalid_url" : MessageLookupByLibrary.simpleMessage("Unable to open Scrapbox because URL is invalid"),
     "scrap_network_error" : MessageLookupByLibrary.simpleMessage("Unable to connect Scrabox. Check your network connection."),
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "settings_black_theme" : MessageLookupByLibrary.simpleMessage("Black theme"),
