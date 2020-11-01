@@ -45,7 +45,8 @@ class Parser {
             rows: table.skip(1).map((e) => e.text.trim()).toList(),
             title: table.first.text.trim().substring("table:".length));
       } else if (text.trimLeft().startsWith(">")) {
-        l = ScraoQuote(indent, line, context, projectDir, content: text);
+        l = ScraoQuote(indent, line, context, projectDir,
+            content: text.trimLeft().substring(">".length));
       } else {
         // ただの段落。
         l = ScrapText(indent, line, context, projectDir, text: text);
