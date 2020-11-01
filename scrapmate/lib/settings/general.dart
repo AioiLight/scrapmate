@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:preferences/preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intent/intent.dart' as android_intent;
 import 'package:scrapmate/util.dart';
 import 'package:package_info/package_info.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsGeneral extends StatefulWidget {
   @override
@@ -86,10 +87,10 @@ class _SettingsGeneralState extends State<SettingsGeneral>
               subtitle:
                   Text(AppLocalizations.of(context).settings_delete_cache_desc),
               onTap: () => {
-                android_intent.Intent()
-                  ..setAction("android.settings.APPLICATION_DETAILS_SETTINGS")
-                  ..setData(Uri.parse("package:space.aioilight.scrapmate"))
-                  ..startActivity()
+                AndroidIntent(
+                  action: "action_application_details_settings",
+                  data: "package:space.aioilight.scrapmate",
+                ).launch()
               },
             ),
           DropdownPreference(AppLocalizations.of(context).settings_grid, "grid",
