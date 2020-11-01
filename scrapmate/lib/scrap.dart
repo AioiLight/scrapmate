@@ -111,7 +111,7 @@ class Scrap {
       startDelimiter: RegExp(r"\[(?<type>[*/-]+)"),
       endDelimiter: RegExp(r"\]"),
       captureGroupName: "content");
-  static final link = RegExp(r"\[([^*/-]+?)(.+?)\]");
+  static final link = RegExp(r"\[([^*/-]*?)(.+?)\]");
   static final titledLink = RegExp(r"(.+?) (.+)");
   static final url = RegExp(r"https?://[\w/:%#\$&\?\(\)~\.=\+\-]+");
   static final inlineCode = RegExp(r"`(.*?)`");
