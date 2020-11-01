@@ -164,7 +164,7 @@ class ScrapText extends ScrapLine {
                   await _getSpan(deco.namedGroup("content"), style: style)));
         } else if (first == bracketLink) {
           // リンク
-          final content = bracketLink.group(1) + bracketLink.group(2);
+          final content = bracketLink.group(1);
           final url = Scrap.url.firstMatch(content);
           final titled = Scrap.titledLink.firstMatch(content);
           final icon = Scrap.icon.firstMatch(content);
@@ -306,6 +306,14 @@ class ScrapText extends ScrapLine {
     if (d.strike > 0) {
       decoration = TextDecoration.lineThrough;
     }
+    if (d.under > 0) {
+      decoration = TextDecoration.underline;
+    }
+
+    if (d.strike > 0 && d.under > 0) {
+      decoration = TextDecoration.combine(
+          [TextDecoration.lineThrough, TextDecoration.underline]);
+    }
 
     return TextStyle(
         fontStyle: fontStyle,
@@ -327,6 +335,9 @@ class ScrapText extends ScrapLine {
           break;
         case "-":
           d.strike++;
+          break;
+        case "_":
+          d.under++;
           break;
         default:
           break;
@@ -448,6 +459,7 @@ class Decorations {
   int strong = 0;
   int italic = 0;
   int strike = 0;
+  int under = 0;
 }
 
 class CachedGyazoImage extends StatelessWidget {
