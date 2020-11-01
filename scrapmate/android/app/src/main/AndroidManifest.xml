@@ -47,6 +47,7 @@
                   android:scheme="https"
                   android:host="scrapbox.io"
               />
+              <data android:scheme="http" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

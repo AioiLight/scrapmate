@@ -6,7 +6,6 @@ import 'package:preferences/preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scrapmate/util.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SettingsGeneral extends StatefulWidget {
   @override
