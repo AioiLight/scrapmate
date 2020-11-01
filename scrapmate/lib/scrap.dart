@@ -119,6 +119,7 @@ class Scrap {
   static final scrapboxPage = RegExp(r"^https?://scrapbox.io/(.+)/(.+)/?$");
   static final gyazo = RegExp(r"https?://(?:i.)?gyazo.com/(.+)");
   static final icon = RegExp(r"^(.+)\.icon$");
+  static final hashTag = RegExp(r"#(\w+)");
 }
 
 class ScrapboxProjectPref {
