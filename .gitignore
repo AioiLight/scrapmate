@@ -20,4 +20,4 @@ doc/api/
 *.js.deps
 *.js.map
 *.jks
-scrapmate/android/app/keystore.properties
+scrapmate/android/keystore.properties
