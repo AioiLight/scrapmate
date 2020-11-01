@@ -131,17 +131,19 @@ class ScrapText extends ScrapLine {
       final bracketLink = Scrap.link.firstMatch(str);
       final plainLink = Scrap.url.firstMatch(str);
       final inlineCode = Scrap.inlineCode.firstMatch(str);
+      final hashTag = Scrap.hashTag.firstMatch(str);
 
       if (deco == null &&
           bracketLink == null &&
           plainLink == null &&
-          inlineCode == null) {
+          inlineCode == null &&
+          hashTag == null) {
         list.add(TextSpan(text: str, style: style));
         str = "";
         continue;
       }
 
-      final matches = {deco, bracketLink, plainLink, inlineCode};
+      final matches = {deco, bracketLink, plainLink, inlineCode, hashTag};
       final sorted = matches.where((element) => element != null).toList();
       sorted.sort((a, b) => a.start.compareTo(b.start));
 
@@ -238,7 +240,7 @@ class ScrapText extends ScrapLine {
                           width: Const.defaultFontSize,
                         ),
                         onTap: () => Util.openScrapPage(
-                            context, projectDir, icon.group(1))))
+                            context, icon.group(1), projectDir)))
               ],
             );
           } else {
@@ -269,6 +271,14 @@ class ScrapText extends ScrapLine {
               DartSyntaxHighlighter(style).format(code),
             ],
           ));
+        } else if (first == hashTag) {
+          // ハッシュタグ
+          list.add(TextSpan(
+              text: "#" + hashTag.group(1),
+              style: linkStyle,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () =>
+                    Util.openScrapPage(context, hashTag.group(1), projectDir)));
         }
         str = str.substring(first.end);
       }
