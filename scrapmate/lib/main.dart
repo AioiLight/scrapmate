@@ -143,7 +143,9 @@ class _MyHomePageState extends State<MyHomePage>
 
       Util.openProjectPage(context, page.group(1).replaceAll("/", ""),
           page.group(1).replaceAll("/", ""));
-      Util.openScrapPage(context, page.group(2).replaceAll("/", ""),
+      Util.openScrapPage(
+          context,
+          Util.urlDecode(page.group(2).replaceAll("/", "")),
           page.group(1).replaceAll("/", ""));
     } else if (project != null) {
       if (Scrap.nonProjectUrl.hasMatch(project.group(1))) {
