@@ -31,8 +31,10 @@ class _ScrapViewState extends State<ScrapView>
   }
 
   void _openShare(ScrapViewArgs args) {
-    Share.share(
-        '${args.pageTitle} - ${Scrap.getPageUrl(args.projectDir, args.pageTitle)}');
+    final title = args.pageTitle;
+    final pageUrl =
+        Scrap.getPageUrl(args.projectDir, Util.urlEncode(args.pageTitle));
+    Share.share('$title - $pageUrl');
   }
 
   @override

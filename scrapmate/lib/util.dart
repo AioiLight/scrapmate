@@ -65,4 +65,12 @@ class Util {
     Navigator.pushNamed(context, "/view",
         arguments: ScrapViewArgs(title, projectDir));
   }
+
+  static String urlEncode(String str) {
+    return Uri.encodeComponent(str);
+  }
+
+  static String urlDecode(String str) {
+    return Uri.decodeComponent(str);
+  }
 }
