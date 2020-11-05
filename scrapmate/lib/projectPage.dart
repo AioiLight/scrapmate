@@ -102,6 +102,7 @@ class _ProjectPageState extends State<ProjectPage>
     final showImage = imageSettings == 0 || (_isWifi && imageSettings == 1);
 
     return Scaffold(
+      key: widget.key,
       appBar: AppBar(
         title: Text(_title),
         actions: [
