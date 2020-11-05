@@ -11,7 +11,9 @@ class ScrapPage extends StatefulWidget {
       this.id,
       this.projectUrl,
       this.pin,
-      this.showImage});
+      this.showImage,
+      Key key})
+      : super(key: key);
 
   final String title;
   final String lead;
