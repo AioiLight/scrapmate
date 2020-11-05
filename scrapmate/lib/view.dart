@@ -70,7 +70,6 @@ class _ScrapViewState extends State<ScrapView>
     final showImage = imageSettings == 0 || (_isWifi && imageSettings == 1);
 
     return Scaffold(
-        key: widget.key,
         appBar: AppBar(
           title: Text(args.pageTitle),
           actions: [
