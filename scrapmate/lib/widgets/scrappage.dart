@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scrapmate/util.dart';
 
-class ScrapPage extends StatefulWidget {
+class ScrapPage extends StatelessWidget {
   ScrapPage(
       {this.title,
       this.lead,
@@ -24,47 +24,26 @@ class ScrapPage extends StatefulWidget {
   final bool showImage;
 
   @override
-  _ScrapPageState createState() => _ScrapPageState();
-}
-
-class _ScrapPageState extends State<ScrapPage>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
         child: Stack(children: [
           ListTile(
-            title: Text(widget.title),
-            subtitle: (widget.thumbnail != null && widget.showImage)
+            title: Text(title),
+            subtitle: (thumbnail != null && showImage)
                 ? CachedNetworkImage(
-                    imageUrl: widget.thumbnail,
-                    errorWidget: (context, url, error) => Text(widget.lead))
-                : Text(widget.lead),
+                    imageUrl: thumbnail,
+                    errorWidget: (context, url, error) => Text(lead))
+                : Text(lead),
           ),
-          if (widget.pin)
+          if (pin)
             const Positioned(
               child: Icon(Icons.push_pin),
               right: 0,
               bottom: 0,
             )
         ]),
-        onTap: () =>
-            Util.openScrapPage(context, widget.title, widget.projectUrl),
+        onTap: () => Util.openScrapPage(context, title, projectUrl),
       ),
       clipBehavior: Clip.antiAlias,
     );
