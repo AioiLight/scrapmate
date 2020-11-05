@@ -23,6 +23,7 @@ class _ProjectPageState extends State<ProjectPage>
   bool _loading = false;
   bool _allLoaded = false;
   bool _isWifi = false;
+  bool _isInited = false;
   String _title;
 
   void _loaded(ScrapboxPageListResult result) {
@@ -30,6 +31,8 @@ class _ProjectPageState extends State<ProjectPage>
       setState(() {
         _itemsResult = result.pages;
       });
+
+      _isInited = true;
     }
   }
 
@@ -73,20 +76,21 @@ class _ProjectPageState extends State<ProjectPage>
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
-    _items = Scrap.getProject(Scrap.getJsonUserTop(args.dir));
-    _items.then((value) => _loaded(value));
+    if (!_isInited) {
+      final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
+      _items = Scrap.getProject(Scrap.getJsonUserTop(args.dir));
+      _items.then((value) => _loaded(value));
 
-    setState(() {
-      _title = args.title;
-    });
+      setState(() {
+        _title = args.title;
+      });
+      Util.isUsingWiFi().then((value) => setState(() {
+            _isWifi = value;
+          }));
 
-    Util.isUsingWiFi().then((value) => setState(() {
-          _isWifi = value;
-        }));
-
-    Scrap.getProjectName(Scrap.getJsonProject(args.dir))
-        .then((value) => setState(() => _title = value));
+      Scrap.getProjectName(Scrap.getJsonProject(args.dir))
+          .then((value) => setState(() => _title = value));
+    }
   }
 
   @override
@@ -146,6 +150,7 @@ class _ProjectPageState extends State<ProjectPage>
 
                   final item = _itemsResult[index];
                   return ScrapPage(
+                    key: PageStorageKey(index),
                     id: item.id,
                     title: item.title,
                     lead: item.descriptions.join("\n"),
