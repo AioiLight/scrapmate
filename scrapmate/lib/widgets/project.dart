@@ -40,8 +40,8 @@ class _ProjectState extends State<Project> with SingleTickerProviderStateMixin {
                     imageUrl: widget.icon,
                     width: 64,
                     errorWidget: (context, url, error) =>
-                        Icon(Icons.error, size: 64))
-                : Icon(Icons.error, size: 64),
+                        const Icon(Icons.error, size: 64))
+                : const Icon(Icons.error, size: 64),
             title: Text(widget.projectName),
             subtitle: Text(Scrap.getProjectUrl(widget.path)),
             onTap: () => {

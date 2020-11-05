@@ -232,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage>
         title: Text(widget.title),
         actions: [
           IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               tooltip: AppLocalizations.of(context).settings,
               onPressed: () {
                 Navigator.pushNamed(context, "/setting");
@@ -279,7 +279,7 @@ class _MyHomePageState extends State<MyHomePage>
       floatingActionButton: FloatingActionButton(
         onPressed: _pushedAddProject,
         tooltip: AppLocalizations.of(context).add_project,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

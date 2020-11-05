@@ -55,7 +55,7 @@ class _ScrapPageState extends State<ScrapPage>
                 : Text(widget.lead),
           ),
           if (widget.pin)
-            Positioned(
+            const Positioned(
               child: Icon(Icons.push_pin),
               right: 0,
               bottom: 0,

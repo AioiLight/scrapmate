@@ -86,7 +86,7 @@ class _SettingsGeneralState extends State<SettingsGeneral>
               subtitle:
                   Text(AppLocalizations.of(context).settings_delete_cache_desc),
               onTap: () => {
-                AndroidIntent(
+                const AndroidIntent(
                   action: "action_application_details_settings",
                   data: "package:space.aioilight.scrapmate",
                 ).launch()
@@ -108,14 +108,14 @@ class _SettingsGeneralState extends State<SettingsGeneral>
                   context: context,
                   applicationVersion: _version,
                   children: [
-                    Text("Powered by Flutter and Love <3"),
+                    const Text("Powered by Flutter and Love <3"),
                     RaisedButton(
-                      child: Text("GitHub"),
+                      child: const Text("GitHub"),
                       onPressed: () => Util.openBrowser(
                           "https://github.com/AioiLight/scrapmate", context),
                     ),
                     RaisedButton(
-                        child: Text("Twitter (@aioilight)"),
+                        child: const Text("Twitter (@aioilight)"),
                         onPressed: () => Util.openBrowser(
                             "https://twitter.com/aioilight/", context))
                   ],
@@ -125,7 +125,7 @@ class _SettingsGeneralState extends State<SettingsGeneral>
                       height: 64,
                       width: 64,
                     ),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white),
                   ))
             },

@@ -361,7 +361,7 @@ class ScrapText extends ScrapLine {
     return RichText(
         text: TextSpan(
       children: await _getSpan(text),
-      style: TextStyle(height: 1.8),
+      style: const TextStyle(height: 1.8),
     ));
   }
 }
@@ -380,7 +380,7 @@ class ScrapCode extends ScrapLine {
     return Column(children: [
       Row(
         children: [
-          Icon(Icons.code),
+          const Icon(Icons.code),
           Text(lang),
         ],
       ),
@@ -419,7 +419,7 @@ class ScrapTable extends ScrapLine {
 
   Future<Widget> generate() async {
     return Column(children: [
-      Row(children: [Icon(Icons.table_view), Text(title ?? "")]),
+      Row(children: [const Icon(Icons.table_view), Text(title ?? "")]),
       _getTable(rows)
     ]);
   }
@@ -441,7 +441,7 @@ class ScraoQuote extends ScrapLine {
           await ScrapText(level, info, context, projectDir,
                   text: content.substring(1))
               .generate(),
-          Positioned(
+          const Positioned(
             top: 0,
             right: 0,
             child: Icon(Icons.format_quote),

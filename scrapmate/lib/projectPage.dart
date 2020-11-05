@@ -106,12 +106,12 @@ class _ProjectPageState extends State<ProjectPage>
         title: Text(_title),
         actions: [
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () => {_openShare(args)},
             tooltip: AppLocalizations.of(context).share,
           ),
           IconButton(
-            icon: Icon(Icons.open_in_browser),
+            icon: const Icon(Icons.open_in_browser),
             onPressed: () =>
                 Util.openBrowser(Scrap.getProjectUrl(args.dir), context),
             tooltip: AppLocalizations.of(context).open_in_browser,
@@ -156,7 +156,7 @@ class _ProjectPageState extends State<ProjectPage>
                   );
                 },
               )
-            : Center(child: CircularProgressIndicator()),
+            : const Center(child: CircularProgressIndicator()),
       ),
     );
   }

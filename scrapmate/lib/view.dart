@@ -74,12 +74,12 @@ class _ScrapViewState extends State<ScrapView>
           title: Text(args.pageTitle),
           actions: [
             IconButton(
-              icon: Icon(Icons.share),
+              icon: const Icon(Icons.share),
               onPressed: () => {_openShare(args)},
               tooltip: AppLocalizations.of(context).share,
             ),
             IconButton(
-              icon: Icon(Icons.open_in_browser),
+              icon: const Icon(Icons.open_in_browser),
               onPressed: () => Util.openBrowser(
                   Scrap.getPageUrl(args.projectDir, args.pageTitle), context),
               tooltip: AppLocalizations.of(context).open_in_browser,
@@ -96,21 +96,21 @@ class _ScrapViewState extends State<ScrapView>
                       if (snapshot.hasData) {
                         return ListView(
                           children: snapshot.data,
-                          padding: EdgeInsets.only(right: 24),
+                          padding: const EdgeInsets.only(right: 24),
                         );
                       } else {
                         return Center(
                             child: Column(
                           children: [
-                            CircularProgressIndicator(),
-                            Flexible(child: Text("Loading..."))
+                            const CircularProgressIndicator(),
+                            const Flexible(child: Text("Loading..."))
                           ],
                           mainAxisSize: MainAxisSize.min,
                         ));
                       }
                     },
                   )
-                : Center(child: CircularProgressIndicator())));
+                : const Center(child: CircularProgressIndicator())));
   }
 }
 
