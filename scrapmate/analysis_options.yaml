@@ -1,0 +1,4 @@
+linter:
+  rules:
+    - camel_case_types
+    - prefer_const_constructors
