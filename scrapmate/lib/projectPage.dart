@@ -18,16 +18,17 @@ class _ProjectPageState extends State<ProjectPage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
-  Future<List<ScrapboxPageListResultPage>> _items;
+  Future<ScrapboxPageListResult> _items;
   List<ScrapboxPageListResultPage> _itemsResult;
   bool _loading = false;
   bool _allLoaded = false;
   bool _isWifi = false;
+  String _title;
 
-  void _loaded(List<ScrapboxPageListResultPage> result) {
+  void _loaded(ScrapboxPageListResult result) {
     if (mounted) {
       setState(() {
-        _itemsResult = result;
+        _itemsResult = result.pages;
       });
     }
   }
@@ -73,12 +74,19 @@ class _ProjectPageState extends State<ProjectPage>
     super.didChangeDependencies();
 
     final args = ModalRoute.of(context).settings.arguments as ProjectPageArgs;
-    _items = Scrap.getPages(Scrap.getJsonUserTop(args.dir));
+    _items = Scrap.getProject(Scrap.getJsonUserTop(args.dir));
     _items.then((value) => _loaded(value));
+
+    setState(() {
+      _title = args.title;
+    });
 
     Util.isUsingWiFi().then((value) => setState(() {
           _isWifi = value;
         }));
+
+    Scrap.getProjectName(Scrap.getJsonProject(args.dir))
+        .then((value) => setState(() => _title = value));
   }
 
   @override
@@ -95,7 +103,7 @@ class _ProjectPageState extends State<ProjectPage>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.title),
+        title: Text(_title),
         actions: [
           IconButton(
             icon: Icon(Icons.share),
