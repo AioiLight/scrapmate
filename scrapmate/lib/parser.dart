@@ -215,6 +215,30 @@ class ScrapText extends ScrapLine {
                       ..onTap = () => Util.openBrowser(url, context));
               }
             }
+          } else if (icon != null) {
+            // アイコン
+            final icn = icon.group(1);
+            String href;
+            if (icn.startsWith("/")) {
+              // 外部アイコン
+              final proj = icn.split("/")[1];
+              final target = icn.split("/").skip(2).join();
+              href = Scrap.getIconUrl(proj, target);
+            } else {
+              href = Scrap.getIconUrl(projectDir, icn);
+            }
+            span = TextSpan(
+              children: [
+                WidgetSpan(
+                    child: InkWell(
+                        child: CachedNetworkImage(
+                          imageUrl: href,
+                          width: Const.defaultFontSize,
+                        ),
+                        onTap: () => Util.openScrapPage(
+                            context, icon.group(1), projectDir)))
+              ],
+            );
           } else if (url != null) {
             final gyazo = Scrap.gyazo.firstMatch(url.input);
             if (gyazo != null) {
@@ -229,20 +253,6 @@ class ScrapText extends ScrapLine {
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => Util.openBrowser(url.input, context));
             }
-          } else if (icon != null) {
-            final herf = Scrap.getIconUrl(projectDir, icon.group(1));
-            span = TextSpan(
-              children: [
-                WidgetSpan(
-                    child: InkWell(
-                        child: CachedNetworkImage(
-                          imageUrl: herf,
-                          width: Const.defaultFontSize,
-                        ),
-                        onTap: () => Util.openScrapPage(
-                            context, icon.group(1), projectDir)))
-              ],
-            );
           } else {
             span = _getInternalLinkSpan(content, style, context, projectDir);
           }
